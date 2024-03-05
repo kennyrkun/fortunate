@@ -12,6 +12,8 @@
 		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/messages.css">
 
 		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/flex-utility.css">
+
+		<link rel="stylesheet" href="./environment.css">
 	</head>
 
 	<body>
@@ -106,7 +108,7 @@
 		            this.src = `env${this.id}.png`;
 		            
 		            // TODO: load then append
-		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}">`);
+		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}" class="environment">`);
 		        }
 		    }
 		    
@@ -137,10 +139,18 @@
 		        {
 		            this.id = characterId;
 		            
-		            let character = $(`<img src="chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`).appendTo("#characters");
-		            
-		            character.fadeIn(3000);
+		            this.element = $(`<img src="chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`).appendTo("#characters");
 		        }
+
+				show(fadeTime = 3000)
+				{
+		            element.fadeIn(fadeTime);
+				}
+
+				hide(fadeTime = 3000)
+				{
+					element.fadeOut(fadeTime);
+				}
 		    }
 		    
 		    class DialogBox
@@ -189,7 +199,12 @@
 					id: 1
 				},
 				{
-					id: 2
+					id: 2,
+					click: {
+						action: "dialog",
+						character: 1,
+						dialog: 1
+					}
 				}
 			]));
 		    
