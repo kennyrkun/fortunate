@@ -13,6 +13,8 @@
 
 		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/flex-utility.css">
 
+		<script src="./imageMapResizer.min.js"></script>
+
 		<link rel="stylesheet" href="./environment.css">
 	</head>
 
@@ -58,11 +60,13 @@
 		    {
 		        constructor()
 		        {
-		            
+		            this.environments = new Map();
 		        }
 		        
 		        addEnvironment(environment, fadeTime = 3000)
 		        {
+					this.environments.set(environment.id, environment);
+
 		            setTimeout(() => 
 		            {
     		            $("#environments").append(environment.element);
@@ -76,13 +80,19 @@
 		        clearEnvironments(fadeTime = 3000)
 		        {
 	                $("#environments").empty()
-	                
-	                for (let environment of $("#environments").children())
-	                    $(environment).fadeOut(fadeTime);
+					
+					// TODO: these will not fade out because it's cleared before this is run
+					for (let environment of $("#environments").children())
+						$(environment).fadeOut(fadeTime);
+
+					this.environments.clear();
 		        }
 		        
+				/*
 		        changeEnvironment(environment, fadeTime = 3000)
 		        {
+					this.environments[environment.id] = environment;
+
 		            if ($("#environments").children().length > 0)
 		                $("#environments").fadeOut(fadeTime);
 		            
@@ -97,6 +107,7 @@
 		            
 		            return environment;
 		        }
+				*/
 		    }
 		    
 		    class Environment
@@ -108,7 +119,18 @@
 		            this.src = `env${this.id}.png`;
 		            
 		            // TODO: load then append
-		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}" class="environment">`);
+		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}" class="environment" usemap="#map${this.id}">`);
+
+					if (this.id == 2)
+						this.element.append(`
+							<map name="map${this.id}">
+								<area target="_blank" href="test1.html" onmouseover="console.log("hover 1");" onclick="console.log("click 1");" coords="150,590,37,544" shape="rect">
+							</map>`);
+					else if (this.id == 3)
+						this.element.append(`
+							<map name="map${this.id}">
+								<area target="_blank" href="test2.html" onmouseover="console.log("hover 2");" onclick="console.log("click 2");" coords="411,700,502,655,555,637,587,617,576,601,581,596,595,596,632,592,648,592,596,600,604,612,622,618,603,659,613,679,632,698" shape="poly">
+							</map>`);
 		        }
 		    }
 		    
@@ -117,7 +139,7 @@
 		        init(environments)
 		        {
 					for (let environment of environments)
-        		    	envMan.addEnvironment(new Environment(environment));
+        		    	envMan.addEnvironment(new Environment(environment), 0);
 		        }
 		    }
 		    
@@ -184,10 +206,33 @@
 		        
 		        hide()
 		        {
-	
 	            
 		        }
 		    }
+
+			imageMapResize();
+
+			/*
+			function getPixel(img, x, y) 
+			{
+				let canvas = document.createElement('canvas');
+				canvas.width = 1;
+				canvas.height = 1;
+				canvas.getContext('2d').drawImage(img, x, y, 1, 1, 0, 0, 1, 1);;
+				let pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
+				canvas.remove();
+
+				return pixelData;   
+			}
+
+			$(document).mousemove((event) => 
+			{
+				for (const environment of envMan.environments.values())
+				{
+					environment.element.toggleClass("hover", getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
+				}
+			});
+			*/
 		    
 		    const MOUNTAIN_ENVIRONMENT = 1;
 		    
@@ -204,6 +249,14 @@
 						action: "dialog",
 						character: 1,
 						dialog: 1
+					}
+				},
+				{
+					id: 3,
+					click: {
+						action: "dialog",
+						character: -1,
+						dialog: 2
 					}
 				}
 			]));

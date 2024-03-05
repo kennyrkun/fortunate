@@ -10,7 +10,7 @@
 
 .environment.hover
 {
-    animation: environment-hover 1s infinite alternate-reverse;
+    animation: environment-hover 1s infinite alternate;
 }
 
 @keyframes environment-hover
