@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>23fAd4c</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		
+		<script src="https://kerrishaus.com/assets/scripts/jquery-3.6.0.min.js"></script>
+        
+		<script src="https://portal.kerrishaus.com/assets/javascript/messages.js"></script>
+		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/messages.css">
+
+		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/flex-utility.css">
+	</head>
+
+	<body>
+	    <div id="environments" style="display: none;">
+	    </div>
+	    
+	    <div id="characters">
+	    </div>
+	    
+	    <div id="dialogBox">
+	    </div>
+	    
+	    <div id="dialogChoiceBox">
+	    </div>
+	    
+	    <style>
+	        html, body
+	        {
+	            padding: 0;
+	            margin: 0;
+	            
+	            background: black;
+	            
+	            max-width: 100vw;
+	            max-height: 100vh;
+	            
+	            overflow: hidden;
+	        }
+	    
+	        #environments img
+	        {
+	            width: 100vw;
+	            max-height: 100vh;
+	        }
+	    </style>
+	
+		<script type="module" id="game">
+		    import { StateMachine } from "./StateMachine.js";
+		    import { State        } from "./State.js";
+		
+		    class EnvironmentManager
+		    {
+		        constructor()
+		        {
+		            
+		        }
+		        
+		        addEnvironment(environment, fadeTime = 3000)
+		        {
+		            setTimeout(() => 
+		            {
+    		            $("#environments").append(environment.element);
+    		            
+    		            $("#environments").fadeIn(fadeTime);
+		            }, fadeTime);
+		            
+		            return environment;
+		        }
+		        
+		        clearEnvironments(fadeTime = 3000)
+		        {
+	                $("#environments").empty()
+	                
+	                for (let environment of $("#environments").children())
+	                    $(environment).fadeOut(fadeTime);
+		        }
+		        
+		        changeEnvironment(environment, fadeTime = 3000)
+		        {
+		            if ($("#environments").children().length > 0)
+		                $("#environments").fadeOut(fadeTime);
+		            
+		            setTimeout(() => 
+		            {
+		                clearEnvironments();
+		                
+    		            $("#environments").append(environment.element);
+    		            
+    		            $("#environments").fadeIn(fadeTime);
+		            }, fadeTime);
+		            
+		            return environment;
+		        }
+		    }
+		    
+		    class Environment
+		    {
+		        constructor(environment)
+		        {
+					this.environment = environment;
+		            this.id  = environment.id;
+		            this.src = `env${this.id}.png`;
+		            
+		            // TODO: load then append
+		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}">`);
+		        }
+		    }
+		    
+		    class EnvironmentNavigationState extends State
+		    {
+		        init(environments)
+		        {
+					for (let environment of environments)
+        		    	envMan.addEnvironment(new Environment(environment));
+		        }
+		    }
+		    
+		    class SingleCharacterDialogState extends State
+		    {
+		        init(characterId, dialogId)
+		        {
+		            this.character = new Character(characterId);
+		            this.dialogBox = new DialogBox(dialogId);
+		            
+		            this.character.show();
+		            this.dialogBox.show();
+		        }
+		    }
+		    
+		    class Character
+		    {
+		        constructor(characterId)
+		        {
+		            this.id = characterId;
+		            
+		            let character = $(`<img src="chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`).appendTo("#characters");
+		            
+		            character.fadeIn(3000);
+		        }
+		    }
+		    
+		    class DialogBox
+		    {
+		        constructor(dialogId)
+		        {
+		            $("#dialogBoxes").append(`<div class="" id="dialog${dialogId}">Dialog</div>`);
+		        }
+		    }
+		    
+		    class DialogChoiceBox
+		    {
+		        constructor()
+		        {
+		            
+		        }
+		    }
+		    
+		    class Dialog
+		    {
+		        constructor(id, text)
+		        {
+		            this.id   = id;
+		            this.text = test;
+		        }
+		        
+		        display()
+		        {
+		            
+		        }
+		        
+		        hide()
+		        {
+	
+	            
+		        }
+		    }
+		    
+		    const MOUNTAIN_ENVIRONMENT = 1;
+		    
+		    window.stateMachine = new StateMachine();
+		    window.envMan       = new EnvironmentManager();
+		    
+		    stateMachine.pushState(new EnvironmentNavigationState([
+				{
+					id: 1
+				},
+				{
+					id: 2
+				}
+			]));
+		    
+		    setTimeout(() => {
+		        $("#environments").children()[0].click();
+		    }, 10000);
+		</script>
+	</body>
+</html>
