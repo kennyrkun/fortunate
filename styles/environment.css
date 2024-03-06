@@ -9,11 +9,12 @@
 {
     user-select: none;
     pointer-events: none;
-    
-    /*
+}
+
+#environments:not(.navigation) .environment
+{
     width: 100vh;
     height: 100vh;
-    */
 }
 
 .environment.hovering

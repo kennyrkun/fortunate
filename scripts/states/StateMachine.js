@@ -20,7 +20,7 @@ export class StateMachine
         console.log("StateMachine is cleaned up.");
     }
     
-    pushState(state)
+    async pushState(state)
     {
         this.states[this.states.length - 1]?.pause();
             
@@ -28,18 +28,18 @@ export class StateMachine
         this.states.push(state);
     
         console.log("StateMachine: Initialising " + state.constructor.name + "...");
-        state.init.apply(state, state.constructorArgs);
+        await state.init.apply(state, state.constructorArgs);
         console.log("StateMachine: Finished initialising " + state.constructor.name + ".");
     
         $("#debug-state").text(state.constructor.name);
     }
     
-    popState()
+    async popState()
     {
         const state = this.states[this.states.length - 1];
     
         console.log("StateMachine: Cleaning up " + state.constructor.name + "...");
-        state.cleanup();
+        await state.cleanup();
         console.log("StateMachine: Cleaned up " + state.constructor.name + ".");
     
         this.states.pop();
@@ -49,10 +49,10 @@ export class StateMachine
         console.log("StateMachine: Popped state.");
     }
     
-    changeState(state)
+    async changeState(state)
     {
-        this.popState();
-        this.pushState(state);
+        await this.popState();
+        await this.pushState(state);
         
         console.log("Changed state.");
     }

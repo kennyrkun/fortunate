@@ -15,18 +15,10 @@
 
 		<script src="./scripts/thirdparty/imageMapResizer.min.js"></script>
 		<link rel="stylesheet" href="./styles/environment.css">
+		<link rel="stylesheet" href="./styles/dialog.css">
 	</head>
 
 	<body>
-	    <div id="characters">
-	    </div>
-	    
-	    <div id="dialogBox">
-	    </div>
-	    
-	    <div id="dialogChoiceBox">
-	    </div>
-	    
 	    <style>
 	        html, body
 	        {
@@ -47,6 +39,8 @@
 		    import { State        } from "./scripts/states/State.js";
 
 			import { EnvironmentManager } from "./scripts/EnvironmentManager.js";
+			import { CharacterManager } from "./scripts/CharacterManager.js";
+			import { DialogManager } from "./scripts/DialogManager.js";
 			
 			import { EnvironmentNavigationState } from "./scripts/states/EnvironmentNavigationState.js";
 		    
@@ -57,37 +51,6 @@
                 clearInterval(sleepSetTimeout_ctrl);
                 return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
             }
-            
-		    class DialogBox
-		    {
-		        constructor(dialogId)
-		        {
-		            $("#dialogBoxes").append(`<div class="dialog-box" id="dialog${dialogId}">Dialog</div>`);
-		        }
-
-				show()
-				{
-
-				}
-
-				hide()
-				{
-
-				}
-
-				next()
-				{
-
-				}
-		    }
-		    
-		    class DialogChoiceBox
-		    {
-		        constructor()
-		        {
-		            
-		        }
-		    }
             
             // TODO: support scaled image
 			function getPixel(img, x, y) 
@@ -111,15 +74,22 @@
 				}
 			});
 		    
-		    window.stateMachine = new StateMachine();
-		    window.envMan       = new EnvironmentManager();
+		    window.stateMachine     = new StateMachine();
+
+		    window.envMan           = new EnvironmentManager();
+
+			window.dialogManager    = new DialogManager();
+			await dialogManager.loadDialog();
+
+			window.characterManager = new CharacterManager();
+			await characterManager.loadCharacters();
 		    
 		    stateMachine.pushState(new EnvironmentNavigationState([
 				{
 					id: 1
 				},
 				{
-					id: 2,
+					id: 3,
 					click: {
 						action: "dialog",
 						character: 1,
@@ -127,18 +97,14 @@
 					}
 				},
 				{
-					id: 3,
+					id: 2,
 					click: {
 						action: "dialog",
-						character: -1,
+						character: 2,
 						dialog: 2
 					}
 				}
-			]));
-		    
-		    setTimeout(() => {
-		        $("#environments").children()[0].click();
-		    }, 10000);
+			], 0));
 		</script>
 	</body>
 </html>

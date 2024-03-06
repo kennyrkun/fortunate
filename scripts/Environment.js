@@ -1,3 +1,5 @@
+import { SingleCharacterDialogState } from "./states/SingleCharacterDialogState.js";
+
 export class Environment
 {
     constructor(environment)
@@ -16,8 +18,19 @@ export class Environment
             this.element.click((event) => {
                 event.stopPropagation();
                 
-                if (this.element.hasClass("hovering"))
-                    console.log("clicked on object ", this);
+                if (!this.element.hasClass("hovering"))
+                {
+                    event.preventDefault();
+                    return;
+                }
+
+                if (this.environment.click.action == "dialog")
+                {
+                    stateMachine.changeState(new SingleCharacterDialogState(
+                        this.environment.click.dialog,
+                        this.environment.click.character,
+                    ));
+                }
             });
         }
 

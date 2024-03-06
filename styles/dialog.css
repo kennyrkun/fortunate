@@ -1,0 +1,86 @@
+@font-face {
+    font-family: "Viner Hand";
+    src: url("../fonts/Viner Hand ITC.otf");
+}
+
+#dialogBox
+{
+    --animation-time: 0.5s;
+
+    box-sizing: border-box;
+
+    position: absolute;
+    z-index: 1;
+
+    background-color: #222222aa;
+    color: rgb(182, 182, 182);
+
+    border: 2px solid #B4C3C1aa;
+
+    padding: 20px;
+
+    width: 80vw;
+    margin-left: 10vw;
+    margin-bottom: 3vw;
+
+    transition: opacity var(--animation-time),
+                top var(--animation-time),
+                left var(--animation-time),
+                right var(--animation-time),
+                bottom var(--animation-time);
+}
+
+#dialogBox.bottom
+{
+    bottom: -100vh;
+    left: 0px;
+}
+
+#dialogBox.bottom.shown
+{
+    bottom: 0;
+}
+
+#dialogBox .dialog-owner
+{
+    display: inline;
+
+    position: relative;
+    top: -62px;
+    font-size: 25px;
+    font-family: "Viner Hand";
+
+    padding: 0 30px;
+    border-radius: 10px 10px 0 0;
+
+    color: black;
+    background: #B4C3C1aa;
+}
+
+#dialogButtons
+{
+    display: none;
+
+    text-align: right;
+}
+
+#dialogButtons.shown
+{
+    display: block;
+}
+
+#dialogButtons .dialog-button:focus
+{
+    position: relative;
+    bottom: 0;
+
+    animation: dialogButtonFocus 1s infinite alternate-reverse;
+}
+
+@keyframes dialogButtonFocus
+{
+    to
+    {
+        bottom: -5px;
+    }
+}

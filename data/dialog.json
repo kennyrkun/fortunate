@@ -1,0 +1,48 @@
+{
+    "1": {
+        "dialog": [
+            "That's too far out of the way into town.",
+            "Maybe I can check it out on my way back."
+        ]
+    },
+    "2": {
+        "dialog": [
+            "Whoa bud, everthin' alright?"
+        ],
+        "next": 3
+    },
+    "3": {
+        "option": [
+            {
+                "dialog": "Sorry, I wasn't paying attention to where I was walking. Could you tell me where we are right now?",
+                "next": 4
+            },
+            {
+                "dialog": "Just a little lost it seems, do you know if there's a town nearby?",
+                "next": 5
+            }
+        ]
+    },
+    "4": {
+        "dialog": [
+            "Well, right now we're on the side of the road, haha.",
+            "But the proper answer is we're currently in [INSERT PLACE NAME].",
+            "There's a town down this road here.",
+            "I'm headed that way now to run some errands. I can show you the way, if you'd like."
+        ],
+        "next": 6
+    },
+    "5": {
+        "dialog": [
+            "Yeah, I do actually! I was headed into town to run some errands.",
+            "You're more than welcome to tag along."
+        ],
+        "next": 6
+    },
+    "6": {
+        "dialog": [
+            "Oh, where are my manners? I forgot to introduce myself!",
+            "I'm Tate, and it's nice to meet you!"
+        ]
+    }
+}

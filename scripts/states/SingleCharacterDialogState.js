@@ -2,12 +2,21 @@ import { State } from "./State.js";
 
 export class SingleCharacterDialogState extends State
 {
-    init(characterId, dialogId)
+    async init(characterId, dialogId, environmentId = null)
     {
-        this.character = new Character(characterId);
-        this.dialogBox = new DialogBox(dialogId);
-        
-        this.character.show();
-        this.dialogBox.show();
+        if (environmentId !== null)
+        {
+            await envMan.clearEnvironments();
+
+            await envMan.addEnvironment(new Environment(environment));
+        }
+
+        this.character = characterManager.getCharacter(characterId);
+        this.dialogBox = dialogManager.startDialog(dialogId, this.character);
+    }
+
+    async cleanup()
+    {
+        await this.character.hide();
     }
 }

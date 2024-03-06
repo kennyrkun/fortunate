@@ -25,7 +25,7 @@ export class EnvironmentManager
         });
     }
     
-    async addEnvironment(environment, fadeTime = 3000)
+    async addEnvironment(environment, fadeTime = 2000)
     {
         this.environments.set(environment.id, environment);
 
@@ -40,7 +40,7 @@ export class EnvironmentManager
         return environment;
     }
     
-    async clearEnvironments(fadeTime = 3000)
+    async clearEnvironments(fadeTime = 2000)
     {
         $(".environment").fadeOut(fadeTime);
             
@@ -55,7 +55,7 @@ export class EnvironmentManager
     }
     
     /*
-    async changeEnvironment(environment, fadeTime = 3000)
+    async changeEnvironment(environment, fadeTime = 2000)
     {
         this.environments[environment.id] = environment;
 
