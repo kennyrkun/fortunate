@@ -7,16 +7,18 @@ export class Character
         this.id = character.id;
         this.name = character.name;
 
-        this.element = $(`<img src="images/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`).appendTo("#characters");
+        this.element = $(`<img src="images/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`);
     }
 
-    show(fadeTime = 2000)
+    async show(fadeTime = 2000)
     {
-        this.element.fadeIn(fadeTime);
+        await this.element.fadeIn(fadeTime);
     }
 
-    hide(fadeTime = 2000)
+    async hide(fadeTime = 2000)
     {
         this.element.fadeOut(fadeTime);
+        
+        await sleep(fadeTime);
     }
 }
