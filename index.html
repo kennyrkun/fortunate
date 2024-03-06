@@ -19,9 +19,6 @@
 	</head>
 
 	<body>
-	    <div id="environments" style="display: none;">
-	    </div>
-	    
 	    <div id="characters">
 	    </div>
 	    
@@ -44,52 +41,78 @@
 	            
 	            overflow: hidden;
 	        }
-	    
-	        #environments img
-	        {
-	            width: 100vw;
-	            max-height: 100vh;
-	        }
 	    </style>
-	
+	    
 		<script type="module" id="game">
 		    import { StateMachine } from "./StateMachine.js";
 		    import { State        } from "./State.js";
-		
+		    
+		    let sleepSetTimeout_ctrl;
+
+            function sleep(ms)
+            {
+                clearInterval(sleepSetTimeout_ctrl);
+                return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
+            }
+            
 		    class EnvironmentManager
 		    {
 		        constructor()
 		        {
 		            this.environments = new Map();
+		            
+		            this.environmentContainerElement = $(`<div id="environments" style="display: none;">`).appendTo("body");
+		            
+		            this.environmentContainerElement.click((event) => 
+		            {
+		                event.preventDefault();
+		                event.stopPropagation();
+		                
+		                console.log("clicked in environment container");
+		                
+		                const hovering = $(".environment.hovering");
+
+                        if (hovering.length > 1)
+                        {
+                            console.warn("too many objects with hovering " + hovering.length);
+                            return;
+                        }
+                        
+                        hovering.click();
+		            });
 		        }
 		        
-		        addEnvironment(environment, fadeTime = 3000)
+		        async addEnvironment(environment, fadeTime = 3000)
 		        {
 					this.environments.set(environment.id, environment);
 
-		            setTimeout(() => 
-		            {
-    		            $("#environments").append(environment.element);
-    		            
-    		            $("#environments").fadeIn(fadeTime);
-		            }, fadeTime);
+		            $("#environments").append(environment.element);
+		            $("#environments").fadeIn(fadeTime);
+		            
+		            // don't return until the fade is finished
+		            await sleep(fadeTime);
+		            
+		            console.log("added environment");
 		            
 		            return environment;
 		        }
 		        
-		        clearEnvironments(fadeTime = 3000)
+		        async clearEnvironments(fadeTime = 3000)
 		        {
-	                $("#environments").empty()
+					$(".environment").fadeOut(fadeTime);
+						
+					// wait until 
+					await sleep(fadeTime);
 					
-					// TODO: these will not fade out because it's cleared before this is run
-					for (let environment of $("#environments").children())
-						$(environment).fadeOut(fadeTime);
+	                $("#environments").empty()
 
 					this.environments.clear();
+					
+					console.log("cleared environments");
 		        }
 		        
 				/*
-		        changeEnvironment(environment, fadeTime = 3000)
+		        async changeEnvironment(environment, fadeTime = 3000)
 		        {
 					this.environments[environment.id] = environment;
 
@@ -119,8 +142,21 @@
 		            this.src = `env${this.id}.png`;
 		            
 		            // TODO: load then append
-		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}" class="environment" usemap="#map${this.id}">`);
+		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}" class="environment">`);
+		            
+		            if ("click" in this.environment)
+		            {
+		                this.element.addClass("interactable");
+		                
+		                this.element.click((event) => {
+		                    event.stopPropagation();
+		                    
+	                        if (this.element.hasClass("hovering"))
+	                            console.log("clicked on object ", this);
+		                });
+		            }
 
+                    /*
 					if (this.id == 2)
 						this.element.append(`
 							<map name="map${this.id}">
@@ -131,15 +167,20 @@
 							<map name="map${this.id}">
 								<area target="_blank" href="test2.html" onmouseover="console.log("hover 2");" onclick="console.log("click 2");" coords="411,700,502,655,555,637,587,617,576,601,581,596,595,596,632,592,648,592,596,600,604,612,622,618,603,659,613,679,632,698" shape="poly">
 							</map>`);
-		        }
-		    }
-		    
-		    class EnvironmentNavigationState extends State
+					*/
+                }
+            }
+            
+            class EnvironmentNavigationState extends State
 		    {
 		        init(environments)
 		        {
+		            envMan.clearEnvironments();
+		            
 					for (let environment of environments)
-        		    	envMan.addEnvironment(new Environment(environment), 0);
+        		    	envMan.addEnvironment(new Environment(environment));
+        		    	
+        		    console.log("added environments to navigation state");
 		        }
 		    }
 		    
@@ -209,10 +250,8 @@
 	            
 		        }
 		    }
-
-			imageMapResize();
-
-			/*
+            
+            // TODO: support scaled image
 			function getPixel(img, x, y) 
 			{
 				let canvas = document.createElement('canvas');
@@ -222,19 +261,17 @@
 				let pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
 				canvas.remove();
 
-				return pixelData;   
+				return pixelData;
 			}
 
 			$(document).mousemove((event) => 
 			{
 				for (const environment of envMan.environments.values())
 				{
-					environment.element.toggleClass("hover", getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
+				    if ("click" in environment.environment)
+					    environment.element.toggleClass("hovering", getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
 				}
 			});
-			*/
-		    
-		    const MOUNTAIN_ENVIRONMENT = 1;
 		    
 		    window.stateMachine = new StateMachine();
 		    window.envMan       = new EnvironmentManager();

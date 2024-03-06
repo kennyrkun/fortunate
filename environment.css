@@ -1,16 +1,24 @@
-.environment
+.environment:not(:first-child)
 {
     position: absolute;
     top: 0;
     left: 0;
-
-    width: 100vh;
-    height: 100vh;
 }
 
-.environment.hover
+.environment
 {
-    animation: environment-hover 1s infinite alternate;
+    user-select: none;
+    pointer-events: none;
+    
+    /*
+    width: 100vh;
+    height: 100vh;
+    */
+}
+
+.environment.hovering
+{
+    animation: environment-hover .5s infinite alternate;
 }
 
 @keyframes environment-hover
