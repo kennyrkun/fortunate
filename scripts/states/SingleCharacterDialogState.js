@@ -5,17 +5,13 @@ export class SingleCharacterDialogState extends State
 {
     async init(characterId, dialogId, environmentId = null)
     {
-        if (environmentId !== null)
-        {
-            await envMan.clearEnvironments();
-
-            await envMan.addEnvironment(new Environment(environment));
-        }
-
-        this.character = characterManager.getCharacter(characterId);
+	this.characterManager = new CharacterManager();
+	await this.characterManager.loadCharacters();
+	    
+        this.character = this.characterManager.getCharacter(characterId);
 
         this.dialogManager = new DialogManager();
-		await this.dialogManager.loadDialog();
+	await this.dialogManager.loadDialog();
 
         this.dialogBox = this.dialogManager.startDialog(dialogId, this.character);
         this.character.show();
@@ -27,6 +23,6 @@ export class SingleCharacterDialogState extends State
         
         await this.character.hide();
         
-        characterManager.characterContainerElement.empty();
+        this.characterManager.characterContainerElement.remove();
     }
 }
