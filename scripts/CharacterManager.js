@@ -6,6 +6,8 @@ export class CharacterManager
     {
         this.loadedCharacters = new Map();
         this.characterData = null;
+        
+        this.characterContainerElement = $(`<div id="characterContainer"></div>`).appendTo(document.body);
     }
 
     async loadCharacters()
@@ -23,7 +25,13 @@ export class CharacterManager
             return this.loadedCharacters.get(characterId);
 
         if (characterId in this.characterData)
-            return new Character(this.characterData[characterId]);
+        {
+            const newCharacter = new Character(this.characterData[characterId]);
+            
+            newCharacter.element.appendTo(this.characterContainerElement);
+            
+            return newCharacter;
+        }
     
         console.error(characterId + " does not exist in characterData");
         return null;
