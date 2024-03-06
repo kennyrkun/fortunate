@@ -18,6 +18,7 @@ export class SingleCharacterDialogState extends State
 		await this.dialogManager.loadDialog();
 
         this.dialogBox = this.dialogManager.startDialog(dialogId, this.character);
+        this.character.show();
     }
 
     async cleanup()
