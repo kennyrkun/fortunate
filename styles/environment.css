@@ -19,6 +19,9 @@
 .environment.hovering
 {
     animation: environment-hover .5s infinite alternate;
+
+    /* // TODO: this does not work */
+    cursor: pointer;
 }
 
 @keyframes environment-hover

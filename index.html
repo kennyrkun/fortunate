@@ -13,9 +13,8 @@
 
 		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/flex-utility.css">
 
-		<script src="./imageMapResizer.min.js"></script>
-
-		<link rel="stylesheet" href="./environment.css">
+		<script src="./scripts/thirdparty/imageMapResizer.min.js"></script>
+		<link rel="stylesheet" href="./styles/environment.css">
 	</head>
 
 	<body>
@@ -44,184 +43,42 @@
 	    </style>
 	    
 		<script type="module" id="game">
-		    import { StateMachine } from "./StateMachine.js";
-		    import { State        } from "./State.js";
+		    import { StateMachine } from "./scripts/states/StateMachine.js";
+		    import { State        } from "./scripts/states/State.js";
+
+			import { EnvironmentManager } from "./scripts/EnvironmentManager.js";
+			
+			import { EnvironmentNavigationState } from "./scripts/states/EnvironmentNavigationState.js";
 		    
 		    let sleepSetTimeout_ctrl;
 
-            function sleep(ms)
+            window.sleep = function(ms)
             {
                 clearInterval(sleepSetTimeout_ctrl);
                 return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
             }
             
-		    class EnvironmentManager
-		    {
-		        constructor()
-		        {
-		            this.environments = new Map();
-		            
-		            this.environmentContainerElement = $(`<div id="environments" style="display: none;">`).appendTo("body");
-		            
-		            this.environmentContainerElement.click((event) => 
-		            {
-		                event.preventDefault();
-		                event.stopPropagation();
-		                
-		                console.log("clicked in environment container");
-		                
-		                const hovering = $(".environment.hovering");
-
-                        if (hovering.length > 1)
-                        {
-                            console.warn("too many objects with hovering " + hovering.length);
-                            return;
-                        }
-                        
-                        hovering.click();
-		            });
-		        }
-		        
-		        async addEnvironment(environment, fadeTime = 3000)
-		        {
-					this.environments.set(environment.id, environment);
-
-		            $("#environments").append(environment.element);
-		            $("#environments").fadeIn(fadeTime);
-		            
-		            // don't return until the fade is finished
-		            await sleep(fadeTime);
-		            
-		            console.log("added environment");
-		            
-		            return environment;
-		        }
-		        
-		        async clearEnvironments(fadeTime = 3000)
-		        {
-					$(".environment").fadeOut(fadeTime);
-						
-					// wait until 
-					await sleep(fadeTime);
-					
-	                $("#environments").empty()
-
-					this.environments.clear();
-					
-					console.log("cleared environments");
-		        }
-		        
-				/*
-		        async changeEnvironment(environment, fadeTime = 3000)
-		        {
-					this.environments[environment.id] = environment;
-
-		            if ($("#environments").children().length > 0)
-		                $("#environments").fadeOut(fadeTime);
-		            
-		            setTimeout(() => 
-		            {
-		                clearEnvironments();
-		                
-    		            $("#environments").append(environment.element);
-    		            
-    		            $("#environments").fadeIn(fadeTime);
-		            }, fadeTime);
-		            
-		            return environment;
-		        }
-				*/
-		    }
-		    
-		    class Environment
-		    {
-		        constructor(environment)
-		        {
-					this.environment = environment;
-		            this.id  = environment.id;
-		            this.src = `env${this.id}.png`;
-		            
-		            // TODO: load then append
-		            this.element = $(`<img src="env${this.id}.png" id="environment-${this.id}" class="environment">`);
-		            
-		            if ("click" in this.environment)
-		            {
-		                this.element.addClass("interactable");
-		                
-		                this.element.click((event) => {
-		                    event.stopPropagation();
-		                    
-	                        if (this.element.hasClass("hovering"))
-	                            console.log("clicked on object ", this);
-		                });
-		            }
-
-                    /*
-					if (this.id == 2)
-						this.element.append(`
-							<map name="map${this.id}">
-								<area target="_blank" href="test1.html" onmouseover="console.log("hover 1");" onclick="console.log("click 1");" coords="150,590,37,544" shape="rect">
-							</map>`);
-					else if (this.id == 3)
-						this.element.append(`
-							<map name="map${this.id}">
-								<area target="_blank" href="test2.html" onmouseover="console.log("hover 2");" onclick="console.log("click 2");" coords="411,700,502,655,555,637,587,617,576,601,581,596,595,596,632,592,648,592,596,600,604,612,622,618,603,659,613,679,632,698" shape="poly">
-							</map>`);
-					*/
-                }
-            }
-            
-            class EnvironmentNavigationState extends State
-		    {
-		        init(environments)
-		        {
-		            envMan.clearEnvironments();
-		            
-					for (let environment of environments)
-        		    	envMan.addEnvironment(new Environment(environment));
-        		    	
-        		    console.log("added environments to navigation state");
-		        }
-		    }
-		    
-		    class SingleCharacterDialogState extends State
-		    {
-		        init(characterId, dialogId)
-		        {
-		            this.character = new Character(characterId);
-		            this.dialogBox = new DialogBox(dialogId);
-		            
-		            this.character.show();
-		            this.dialogBox.show();
-		        }
-		    }
-		    
-		    class Character
-		    {
-		        constructor(characterId)
-		        {
-		            this.id = characterId;
-		            
-		            this.element = $(`<img src="chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`).appendTo("#characters");
-		        }
-
-				show(fadeTime = 3000)
-				{
-		            element.fadeIn(fadeTime);
-				}
-
-				hide(fadeTime = 3000)
-				{
-					element.fadeOut(fadeTime);
-				}
-		    }
-		    
 		    class DialogBox
 		    {
 		        constructor(dialogId)
 		        {
-		            $("#dialogBoxes").append(`<div class="" id="dialog${dialogId}">Dialog</div>`);
+		            $("#dialogBoxes").append(`<div class="dialog-box" id="dialog${dialogId}">Dialog</div>`);
 		        }
+
+				show()
+				{
+
+				}
+
+				hide()
+				{
+
+				}
+
+				next()
+				{
+
+				}
 		    }
 		    
 		    class DialogChoiceBox
@@ -229,25 +86,6 @@
 		        constructor()
 		        {
 		            
-		        }
-		    }
-		    
-		    class Dialog
-		    {
-		        constructor(id, text)
-		        {
-		            this.id   = id;
-		            this.text = test;
-		        }
-		        
-		        display()
-		        {
-		            
-		        }
-		        
-		        hide()
-		        {
-	            
 		        }
 		    }
             
