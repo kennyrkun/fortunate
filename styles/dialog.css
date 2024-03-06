@@ -67,14 +67,11 @@
 #dialogButtons.shown
 {
     display: block;
-}
-
-#dialogButtons .dialog-button:focus
-{
-    position: relative;
-    bottom: 0;
 
     animation: dialogButtonFocus 1s infinite alternate-reverse;
+
+    position: relative;
+    bottom: 0;
 }
 
 @keyframes dialogButtonFocus
