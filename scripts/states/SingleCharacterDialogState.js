@@ -24,7 +24,9 @@ export class SingleCharacterDialogState extends State
     async cleanup()
     {
         await this.dialogManager.clearDialogBox();
-
+        
         await this.character.hide();
+        
+        characterManager.characterContainerElement.empty();
     }
 }
