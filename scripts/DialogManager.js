@@ -2,9 +2,10 @@ export class DialogManager
 {
     constructor()
     {
-        this.dialogBoxElement     = null;
-        this.dialogBoxTextElement = null;
-        this.dialogBoxButton      = null;
+        this.dialogBoxElement         = null;
+        this.dialogBoxTextElement     = null;
+        this.dialogBoxButtonContainer = null;
+        this.dialogBoxButton          = null;
 
         this.textAnimationTime = 75;
         this.textAnimationInterval = null;
@@ -24,6 +25,9 @@ export class DialogManager
 
     async clearDialogBox()
     {
+        if (this.dialogBoxElement === null)
+            return;
+            
         this.dialogBoxElement.removeClass("shown");
 
         await sleep(500);
@@ -42,7 +46,9 @@ export class DialogManager
         this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${character.name}</div></div>`).appendTo(document.body);
         this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
 
-        this.dialogBoxButton      = $(`<div id="dialogButtons" class=""><button class="dialog-button">Next</button></div>`).appendTo(this.dialogBoxElement);
+        this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(this.dialogBoxElement);
+        
+        this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
         this.dialogBoxButton.click(() => { this.advanceDialog(); });
 
         this.dialog.currentDialog = 0;
@@ -73,13 +79,15 @@ export class DialogManager
             clearInterval(this.textAnimationInterval);
             console.log("text animation finished");
 
-            this.dialogBoxButton.addClass("shown");
+            this.dialogBoxButtonContainer.show();
             this.dialogBoxButton.focus();
         }, this.textAnimationTime);
     }
 
     advanceDialog()
     {
+        this.dialogBoxButtonContainer.hide();
+        
         if (this.dialog.currentDialog >= this.dialog.dialog.length - 1)
         {
             console.log("return to previous state");
