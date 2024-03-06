@@ -19,7 +19,7 @@
 
 .environment.hovering
 {
-    animation: environment-hover .5s infinite alternate;
+    animation: environment-hover 1s infinite;
 
     /* // TODO: this does not work */
     cursor: pointer;
@@ -32,8 +32,13 @@
         filter: brightness(1);
     }
 
-    to
+    50%
     {
         filter: brightness(1.5);
+    }
+    
+    to
+    {
+        filter: brightness(1);
     }
 }
