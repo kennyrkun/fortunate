@@ -28,9 +28,15 @@ export class EnvironmentNavigationState extends State
 
     async pause()
     {
-        await this.envMan.hide();
-
         this.removeEventListeners();
+        
+        this.envMan.environmentContainerElement.find(".environment").removeClass("hovering");
+        
+        console.log(this.envMan.environmentContainerElement.find(".environment"));
+        
+        await this.envMan.hide();
+        
+        console.log("paused environmentnavigationstate");
     }
 
     async resume()
@@ -38,6 +44,8 @@ export class EnvironmentNavigationState extends State
         this.registerEventListeners();
 
         await this.envMan.show();
+        
+        console.log("resumed environmentnavigationstate");
     }
 
     // TODO: support scaled images
@@ -81,9 +89,10 @@ export class EnvironmentNavigationState extends State
 
     removeEventListeners()
     {
-        // TODO: remove mouse click on environments
+        // TODO: remove this class's specific listeners only
         
-        $(this.envMan.environmentContainerElement).off("mousemove", (event) => { this.onMouseMove(event) });
+        $(this.envMan.environmentContainerElement).off("mousemove");
+        $(this.envMan.environmentContainerElement).off("click");
 
         console.log("removed event listeners from environmentnavigationstate");
     }
@@ -93,7 +102,9 @@ export class EnvironmentNavigationState extends State
         for (const environment of this.envMan.environments.values())
         {
             if ("click" in environment.environment)
+            {
                 environment.element.toggleClass("hovering", this.getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
+            }
         }
     }
 }
