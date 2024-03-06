@@ -26,9 +26,9 @@ export class Environment
 
                 if (this.environment.click.action == "dialog")
                 {
-                    stateMachine.changeState(new SingleCharacterDialogState(
-                        this.environment.click.dialog,
+                    stateMachine.pushState(new SingleCharacterDialogState(
                         this.environment.click.character,
+                        this.environment.click.dialog
                     ));
                 }
             });

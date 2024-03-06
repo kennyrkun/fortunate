@@ -52,31 +52,7 @@
                 return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
             }
             
-            // TODO: support scaled image
-			function getPixel(img, x, y) 
-			{
-				let canvas = document.createElement('canvas');
-				canvas.width = 1;
-				canvas.height = 1;
-				canvas.getContext('2d').drawImage(img, x, y, 1, 1, 0, 0, 1, 1);;
-				let pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
-				canvas.remove();
-
-				return pixelData;
-			}
-
-			$(document).mousemove((event) => 
-			{
-				for (const environment of envMan.environments.values())
-				{
-				    if ("click" in environment.environment)
-					    environment.element.toggleClass("hovering", getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
-				}
-			});
-		    
 		    window.stateMachine     = new StateMachine();
-
-		    window.envMan           = new EnvironmentManager();
 
 			window.dialogManager    = new DialogManager();
 			await dialogManager.loadDialog();
@@ -102,6 +78,14 @@
 						action: "dialog",
 						character: 2,
 						dialog: 2
+					}
+				},
+				{
+					id: 4,
+					click: {
+						action: "dialog",
+						character: 1,
+						dialog: 7
 					}
 				}
 			], 0));

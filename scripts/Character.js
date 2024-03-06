@@ -10,13 +10,13 @@ export class Character
         this.element = $(`<img src="images/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`).appendTo("#characters");
     }
 
-    show(fadeTime = 3000)
+    show(fadeTime = 2000)
     {
-        element.fadeIn(fadeTime);
+        this.element.fadeIn(fadeTime);
     }
 
-    hide(fadeTime = 3000)
+    hide(fadeTime = 2000)
     {
-        element.fadeOut(fadeTime);
+        this.element.fadeOut(fadeTime);
     }
 }

@@ -22,7 +22,7 @@ export class StateMachine
     
     async pushState(state)
     {
-        this.states[this.states.length - 1]?.pause();
+        await this.states[this.states.length - 1]?.pause();
             
         state.stateMachine = this;
         this.states.push(state);
@@ -44,7 +44,7 @@ export class StateMachine
     
         this.states.pop();
         
-        this.states[this.states.length - 1]?.resume();
+        await this.states[this.states.length - 1]?.resume();
             
         console.log("StateMachine: Popped state.");
     }

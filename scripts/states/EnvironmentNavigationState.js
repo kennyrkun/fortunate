@@ -1,25 +1,99 @@
 import { State } from "./State.js";
 
 import { Environment } from "../Environment.js";
+import { EnvironmentManager } from "../EnvironmentManager.js";
 
 export class EnvironmentNavigationState extends State
 {
     async init(environments, fadeTime = 3000)
     {
-        envMan.clearEnvironments();
+        this.envMan = new EnvironmentManager();
 
-        envMan.environmentContainerElement.addClass("navigation");
-        
+        this.envMan.environmentContainerElement.addClass("navigation");
+
+        this.registerEventListeners();
+
         for (let environment of environments)
-            envMan.addEnvironment(new Environment(environment), fadeTime);
+            this.envMan.addEnvironment(new Environment(environment), fadeTime);
+
+        this.envMan.show(fadeTime);
             
         console.log("added environments to navigation state");
     }
 
     async cleanup()
     {
-        await envMan.clearEnvironments();
+        await this.envMan.clearEnvironments();
+    }
 
-        envMan.environmentContainerElement.removeClass("navigation");
+    async pause()
+    {
+        await this.envMan.hide();
+
+        this.removeEventListeners();
+    }
+
+    async resume()
+    {
+        this.registerEventListeners();
+
+        await this.envMan.show();
+    }
+
+    // TODO: support scaled images
+    getPixel(img, x, y) 
+    {
+        // don't make a new canvas every time
+        let canvas = document.createElement('canvas');
+        canvas.width = 1;
+        canvas.height = 1;
+        canvas.getContext('2d').drawImage(img, x, y, 1, 1, 0, 0, 1, 1);;
+        let pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
+        canvas.remove();
+
+        return pixelData;
+    }
+
+    registerEventListeners()
+    {
+        this.envMan.environmentContainerElement.on("click", (event) => 
+        {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            console.log("clicked in environment container");
+            
+            const hovering = this.envMan.environmentContainerElement.find(".hovering");
+
+            if (hovering.length > 1)
+            {
+                console.warn("too many objects with hovering " + hovering.length);
+                return;
+            }
+            
+            hovering.click();
+        });
+
+        $(this.envMan.environmentContainerElement).on("mousemove", (event) => { this.onMouseMove(event) });
+
+        console.log("added event listeners to environmentnavigationstate");
+    }
+
+    removeEventListeners()
+    {
+        // TODO: remove mouse click on environments
+        
+        $(this.envMan.environmentContainerElement).off("mousemove", (event) => { this.onMouseMove(event) });
+
+        console.log("removed event listeners from environmentnavigationstate");
+    }
+
+    onMouseMove(event)
+    {
+        for (const environment of this.envMan.environments.values())
+        {
+            if ("click" in environment.environment)
+                environment.element.toggleClass("hovering", this.getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
+        }
     }
 }

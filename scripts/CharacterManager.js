@@ -22,6 +22,10 @@ export class CharacterManager
         if (this.loadedCharacters.has(characterId))
             return this.loadedCharacters.get(characterId);
 
-        return new Character(this.characterData[characterId]);
+        if (characterId in this.characterData)
+            return new Character(this.characterData[characterId]);
+    
+        console.error(characterId + " does not exist in characterData");
+        return null;
     }
 }

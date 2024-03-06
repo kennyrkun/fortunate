@@ -4,74 +4,47 @@ export class EnvironmentManager
     {
         this.environments = new Map();
         
-        this.environmentContainerElement = $(`<div id="environments" style="display: none;">`).appendTo("body");
-        
-        this.environmentContainerElement.click((event) => 
-        {
-            event.preventDefault();
-            event.stopPropagation();
-            
-            console.log("clicked in environment container");
-            
-            const hovering = $(".environment.hovering");
-
-            if (hovering.length > 1)
-            {
-                console.warn("too many objects with hovering " + hovering.length);
-                return;
-            }
-            
-            hovering.click();
-        });
+        this.environmentContainerElement = $(`<div class="environment-container" style="display: none;">`).appendTo("body");
     }
     
-    async addEnvironment(environment, fadeTime = 2000)
+    addEnvironment(environment)
     {
         this.environments.set(environment.id, environment);
 
-        $("#environments").append(environment.element);
-        $("#environments").fadeIn(fadeTime);
-        
-        // don't return until the fade is finished
-        await sleep(fadeTime);
+        this.environmentContainerElement.append(environment.element);
         
         console.log("added environment");
         
         return environment;
     }
     
+    // fade the environments and then clear them
     async clearEnvironments(fadeTime = 2000)
     {
-        $(".environment").fadeOut(fadeTime);
-            
-        // wait until 
-        await sleep(fadeTime);
+        await this.hide();
         
-        $("#environments").empty()
+        this.environmentContainerElement.empty()
 
         this.environments.clear();
         
         console.log("cleared environments");
     }
     
-    /*
-    async changeEnvironment(environment, fadeTime = 2000)
+    async hide(fadeTime = 2000)
     {
-        this.environments[environment.id] = environment;
+        console.log("hiding environment");
 
-        if ($("#environments").children().length > 0)
-            $("#environments").fadeOut(fadeTime);
-        
-        setTimeout(() => 
-        {
-            clearEnvironments();
-            
-            $("#environments").append(environment.element);
-            
-            $("#environments").fadeIn(fadeTime);
-        }, fadeTime);
-        
-        return environment;
+        this.environmentContainerElement.fadeOut(fadeTime);
+
+        await sleep(fadeTime);
     }
-    */
+
+    async show(fadeTime = 2000)
+    {
+        console.log("showing environment");
+
+        this.environmentContainerElement.fadeIn(fadeTime);
+
+        await sleep(fadeTime);
+    }
 }
