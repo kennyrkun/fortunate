@@ -39,10 +39,6 @@
 		    import { StateMachine } from "./scripts/states/StateMachine.js";
 		    import { State        } from "./scripts/states/State.js";
 
-			import { EnvironmentManager } from "./scripts/EnvironmentManager.js";
-			import { CharacterManager } from "./scripts/CharacterManager.js";
-			import { DialogManager } from "./scripts/DialogManager.js";
-			
 			import { EnvironmentNavigationState } from "./scripts/states/EnvironmentNavigationState.js";
 		    
 		    let sleepSetTimeout_ctrl;
@@ -55,9 +51,6 @@
             
 		    window.stateMachine     = new StateMachine();
 
-			window.characterManager = new CharacterManager();
-			await characterManager.loadCharacters();
-		    
 		    stateMachine.pushState(new EnvironmentNavigationState([
 				{
 					id: 1
