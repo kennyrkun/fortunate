@@ -2,16 +2,18 @@ import { SingleCharacterDialogState } from "./states/SingleCharacterDialogState.
 
 export class Environment
 {
-    constructor(environment)
+    constructor(environmentName, imageName, attributes)
     {
-        this.environment = environment;
-        this.id  = environment.id;
-        this.src = `env${this.id}.png`;
+        console.log("constructing object", environmentName, imageName, attributes);
+
+        this.environmentName = environmentName;
+        this.imageName = imageName;
+        this.attributes = attributes;
         
         // TODO: load then append
-        this.element = $(`<img src="images/env${this.id}.png" id="environment-${this.id}" class="environment">`);
+        this.element = $(`<img src="images/environments/${environmentName}/${imageName}.png" id="environment-${imageName}" class="environment">`);
         
-        if ("click" in this.environment)
+        if ("click" in this.attributes)
         {
             this.element.addClass("interactable");
             
@@ -24,14 +26,16 @@ export class Environment
                     return;
                 }
 
-                if (this.environment.click.action == "dialog")
+                if (this.attributes.click.action == "dialog")
                 {
                     stateMachine.pushState(new SingleCharacterDialogState(
-                        this.environment.click.character,
-                        this.environment.click.dialog
+                        this.attributes.click.character,
+                        this.attributes.click.dialog
                     ));
                 }
             });
+
+            console.log("added click event to", imageName);
         }
 
         /*

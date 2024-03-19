@@ -9,7 +9,7 @@ export class EnvironmentManager
     
     addEnvironment(environment)
     {
-        this.environments.set(environment.id, environment);
+        this.environments.set(environment.imageName, environment);
 
         this.environmentContainerElement.append(environment.element);
         

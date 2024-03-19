@@ -3,20 +3,41 @@ import { State } from "./State.js";
 import { Environment } from "../Environment.js";
 import { EnvironmentManager } from "../EnvironmentManager.js";
 
+// TODO: rename this to EnvironmentState
 export class EnvironmentNavigationState extends State
 {
-    async init(environments, fadeTime = 3000)
+    async init(environmentName, fadeTime = 3000)
     {
         this.envMan = new EnvironmentManager();
 
+        // TODO: do not apply this when unused
         this.envMan.environmentContainerElement.addClass("navigation");
 
+        await this.loadEnvironmentData();
+
+        this.environmentData = this.environmentData[environmentName];
+
+        // add the background first
+        this.envMan.addEnvironment(new Environment(
+            this.environmentData.directory,
+            this.environmentData.background,
+            {}
+        ), fadeTime);
+
+        // isn't specificially to add interactables, but that's what it does
+        for (const [name, attributes] of Object.entries(this.environmentData.interactables))
+            this.envMan.addEnvironment(new Environment(
+                this.environmentData.directory,
+                name, 
+                attributes
+            ), fadeTime);
+
+        console.log(this.envMan);
+
+        // wait for environment to finish fading before registering event listeners
+        await this.envMan.show(fadeTime);
+    
         this.registerEventListeners();
-
-        for (let environment of environments)
-            this.envMan.addEnvironment(new Environment(environment), fadeTime);
-
-        this.envMan.show(fadeTime);
             
         console.log("added environments to navigation state");
     }
@@ -48,10 +69,19 @@ export class EnvironmentNavigationState extends State
         console.log("resumed environmentnavigationstate");
     }
 
+    // make this a static cache so it we don't have to reload the entire
+    // environment file every time
+    async loadEnvironmentData()
+    {
+        this.environmentData = await $.getJSON("./data/environments.json");
+
+        console.log("loaded environment data", this.environmentData);
+    }
+
     // TODO: support scaled images
     getPixel(img, x, y) 
     {
-        // don't make a new canvas every time
+        // TODO: don't make a new canvas every time
         let canvas = document.createElement('canvas');
         canvas.width = 1;
         canvas.height = 1;
@@ -100,11 +130,7 @@ export class EnvironmentNavigationState extends State
     onMouseMove(event)
     {
         for (const environment of this.envMan.environments.values())
-        {
-            if ("click" in environment.environment)
-            {
+            if ("click" in environment.attributes)
                 environment.element.toggleClass("hovering", this.getPixel(environment.element[0], event.clientX, event.clientY)[3] > 0);
-            }
-        }
     }
 }

@@ -49,37 +49,9 @@
                 return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
             }
             
-		    window.stateMachine     = new StateMachine();
+		    window.stateMachine = new StateMachine();
 
-		    stateMachine.pushState(new EnvironmentNavigationState([
-				{
-					id: 1
-				},
-				{
-					id: 3,
-					click: {
-						action: "dialog",
-						character: 1,
-						dialog: 1
-					}
-				},
-				{
-					id: 2,
-					click: {
-						action: "dialog",
-						character: 2,
-						dialog: 2
-					}
-				},
-				{
-					id: 4,
-					click: {
-						action: "dialog",
-						character: 1,
-						dialog: 7
-					}
-				}
-			], 0));
+		    stateMachine.pushState(new EnvironmentNavigationState("oafmound_start", 0));
 		</script>
 	</body>
 </html>

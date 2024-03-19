@@ -1,0 +1,29 @@
+{
+    "oafmound_start": {
+        "directory": "oafmound",
+        "background": "scene",
+        "interactables": {
+            "house": {
+                "click": {
+                    "action": "dialog",
+                    "dialog": 1,
+                    "character": 1
+                }
+            },
+            "path": {
+                "click": {
+                    "action": "dialog",
+                    "dialog": 2,
+                    "character": 2
+                }
+            },
+            "far_mountain": {
+                "click": {
+                    "action": "dialog",
+                    "dialog": 7,
+                    "character": 1
+                }
+            }
+        }
+    }
+}
