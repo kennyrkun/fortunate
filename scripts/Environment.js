@@ -33,6 +33,17 @@ export class Environment
                         this.attributes.click.dialog
                     ));
                 }
+                else if (this.attributes.click.action == "changeEnvironment")
+                {
+                    // TODO: configure transition time from dialog data
+                    const newState = new EnvrionmentNavigationState(this.attributes.click.environment);
+                    stateMachine.changeState(newState);
+                }
+                else if (this.attributes.click.action == "pushEnvironment")
+                {
+                    const newState = new EnvrionmentNavigationState(this.attributes.click.environment);
+                    stateMachine.pushState(newState);
+                }
             });
 
             console.log("added click event to", imageName);

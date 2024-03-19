@@ -90,7 +90,19 @@ export class DialogManager
         
         if (this.dialog.currentDialog >= this.dialog.dialog.length - 1)
         {
-            console.log("return to previous state");
+            console.log("dialog state is over");
+
+            if ("action" in this.dialog.dialog)
+            {
+                // TODO: configure transition time from dialog data
+                const newState = new EnvrionmentNavigationState(this.dialog.dialog.action.environment);
+
+                if (this.dialog.dialog.action.type == "changeEnvironment")
+                    stateMachine.changeState(newState);
+                else if (this.dialog.dialog.action.type == "pushEnvironment")
+                    stateMachine.pushState(newState);
+            }
+
             stateMachine.popState();
             return;
         }
