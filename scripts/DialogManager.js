@@ -50,6 +50,7 @@ export class DialogManager
         
         this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
         this.dialogBoxButton.click(() => { this.advanceDialog(); });
+        this.dialogBoxButton.keydown(() => { this.advanceDialog(); });
 
         this.dialog.currentDialog = 0;
         this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
