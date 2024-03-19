@@ -25,5 +25,32 @@
                 }
             }
         }
+    },
+    "town": {
+        "directory": "town",
+        "background": "env5",
+        "interactables": {
+            "env6": {
+                "click": {
+                    "action": "dialog",
+                    "dialog": 8,
+                    "character": 1
+                }
+            },
+            "env7": {
+                "click": {
+                    "action": "dialog",
+                    "dialog": 8,
+                    "character": 1
+                }
+            },
+            "env8": {
+                "click": {
+                    "action": "dialog",
+                    "dialog": 8,
+                    "character": 1
+                }
+            }
+        }
     }
 }

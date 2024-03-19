@@ -43,12 +43,21 @@
         "dialog": [
             "Oh, where are my manners? I forgot to introduce myself!",
             "I'm Tate, and it's nice to meet you!"
-        ]
+        ],
+        "action": {
+            "type": "pushEnvironment",
+            "environment": "town"
+        }
     },
     "7": {
         "dialog": [
             "See that mountain? You can buy it.",
             "(In a DLC for the price of a real mountain.)"
+        ]
+    },
+    "8": {
+        "dialog": [
+            "I can't go in here right now."
         ]
     }
 }
