@@ -33,11 +33,15 @@ export class DialogManager
         await sleep(500);
 
         this.dialogBoxElement.remove();
+
+        $(document).off('keydown', () => { this.advanceDialog(); });
     }
 
     startDialog(dialogId, character)
     {
         console.log("load dialog");
+
+        this.character = character;
 
         this.clearDialogBox();
 
@@ -50,7 +54,9 @@ export class DialogManager
         
         this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
         this.dialogBoxButton.click(() => { this.advanceDialog(); });
-        this.dialogBoxButton.keydown(() => { this.advanceDialog(); });
+        // TODO: put this on the dialog box itself, not the document
+        // TODO: make this finish the text box instead of immediately sdkipping it
+        $(document).keydown(() => { this.advanceDialog(); });
 
         this.dialog.currentDialog = 0;
         this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
@@ -91,18 +97,28 @@ export class DialogManager
         
         if (this.dialog.currentDialog >= this.dialog.dialog.length - 1)
         {
-            console.log("dialog state is over");
+            console.log("dialog state is over", this.dialog);
 
-            if ("action" in this.dialog.dialog)
+            if ("action" in this.dialog)
             {
                 // TODO: configure transition time from dialog data
-                const newState = new EnvrionmentNavigationState(this.dialog.dialog.action.environment);
+                const newState = new EnvrionmentNavigationState(this.dialog.action.environment);
 
-                if (this.dialog.dialog.action.type == "changeEnvironment")
+                if (this.dialog.action.type == "changeEnvironment")
                     stateMachine.changeState(newState);
-                else if (this.dialog.dialog.action.type == "pushEnvironment")
+                else if (this.dialog.action.type == "pushEnvironment")
                     stateMachine.pushState(newState);
+                else
+                    console.error("dialog had action but it's type was invalid, popping state");
             }
+            else if ("next" in this.dialog)
+            {
+                // TODO: don't use this.character.id, instead, it should
+                // use the character designated by the dialog data
+                this.startDialog(this.dialog.next, this.character.id);
+            }
+            else
+                console.log("dialog has no action, popping state");
 
             stateMachine.popState();
             return;
