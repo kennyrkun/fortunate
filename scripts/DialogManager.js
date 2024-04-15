@@ -67,7 +67,7 @@ export class DialogManager
         {
             for (const option of this.dialog.option)
             {
-                const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxButtonContainer);
+                const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxElement);
 
                 if ("next" in option)
                     button.click(async () => { await this.startDialog(option.next) });
