@@ -1,3 +1,5 @@
+import { CharacterManager } from "../CharacterManager.js";
+
 export class DialogManager
 {
     constructor()
