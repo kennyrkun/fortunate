@@ -35,7 +35,7 @@ export class DialogManager
 
         this.dialogBoxElement.remove();
 
-        $(document).off('keydown', () => { this.advanceDialog(); });
+        $(document).off('keydown', async () => { await this.advanceDialog(); });
     }
 
     async startDialog(dialogId)
@@ -70,10 +70,10 @@ export class DialogManager
             this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(this.dialogBoxElement);
             
             this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
-            this.dialogBoxButton.click(() => { this.advanceDialog(); });
+            this.dialogBoxButton.click(async () => { await this.advanceDialog(); });
             // TODO: put this on the dialog box itself, not the document
             // TODO: make this finish the text box instead of immediately sdkipping it
-            $(document).keydown(() => { this.advanceDialog(); });
+            $(document).keydown(async () => { await this.advanceDialog(); });
     
             this.dialog.currentDialog = 0;
             this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
@@ -114,7 +114,7 @@ export class DialogManager
         }, this.textAnimationTime);
     }
 
-    advanceDialog()
+    async advanceDialog()
     {
         this.dialogBoxButtonContainer.hide();
         
