@@ -1,4 +1,4 @@
-import { CharacterManager } from "../CharacterManager.js";
+import { CharacterManager } from "./CharacterManager.js";
 
 export class DialogManager
 {
