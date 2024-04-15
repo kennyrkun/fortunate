@@ -12,7 +12,7 @@ export class DialogManager
         this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
 
-		this.characterManager = null;
+	this.characterManager = null;
         this.character        = null;
         
         this.dialog     = null;
@@ -122,6 +122,8 @@ export class DialogManager
     {
 		if ("option" in this.dialog)
 			return;
+
+		console.log("advancing dialog")
 		
         this.dialogBoxButtonContainer.hide();
         
