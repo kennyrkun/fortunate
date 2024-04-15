@@ -148,7 +148,7 @@ export class DialogManager
                 console.log("checking dialog action");
                 
                 // TODO: configure transition time from dialog data
-                const newState = new EnvrionmentNavigationState(this.dialog.action.environment);
+                const newState = new EnvironmentNavigationState(this.dialog.action.environment);
 
                 if (this.dialog.action.type == "changeEnvironment")
                     stateMachine.changeState(newState);
