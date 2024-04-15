@@ -52,14 +52,13 @@ export class DialogManager
 
         this.dialog = this.getDialog(dialogId);
 
-		if (this.character)
+		if (this.character instanceof Character)
 		{
-			this.character.hide();
+			this.character.hide(0);
 			this.character = null;
 		}
 	    
         this.character = this.characterManager.getCharacter(this.dialog.character);
-	    this.character.show();
 
         this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
         this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
@@ -73,6 +72,8 @@ export class DialogManager
                 if ("next" in option)
                     button.click(async () => { await this.startDialog(option.next) });
                 // TODO: button to go to a new scene
+
+				console.log("added option to dialog box", option);
             }
         }
         else
@@ -101,7 +102,7 @@ export class DialogManager
             this.dialogBoxElement.addClass("shown");
         }, 0);
 
-        this.character.show();
+        this.character.show(0);
     }
 
     startTextAnimation()
