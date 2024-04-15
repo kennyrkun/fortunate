@@ -7,12 +7,13 @@ export class DialogManager
         this.dialogBoxButtonContainer = null;
         this.dialogBoxButton          = null;
 
-        this.textAnimationTime = 75;
+        this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
 
-        this.character = null;
-        this.dialog    = null;
-
+        this.characterManager = null;
+        this.character        = null;
+        
+        this.dialog     = null;
         this.dialogData = null;
     }
 
@@ -37,16 +38,19 @@ export class DialogManager
         $(document).off('keydown', () => { this.advanceDialog(); });
     }
 
-    startDialog(dialogId, character)
+    startDialog(dialogId)
     {
         console.log("load dialog");
-
-        this.character = character;
 
         this.clearDialogBox();
 
         this.dialog = this.getDialog(dialogId);
-        
+
+        this.characterManager = new CharacterManager();
+        await this.characterManager.loadCharacters();
+	    
+        this.character = this.characterManager.getCharacter(characterId);
+
         this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${character.name}</div></div>`).appendTo(document.body);
         this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
 
@@ -78,11 +82,16 @@ export class DialogManager
     
             setTimeout(() =>
             {
-                this.dialogBoxElement.addClass("shown");
-    
                 this.startTextAnimation();
             }, 0);
         }
+
+        setTimeout(() =>
+        {
+            this.dialogBoxElement.addClass("shown");
+        }, 0);
+
+        this.character.show();
     }
 
     startTextAnimation()
@@ -133,7 +142,7 @@ export class DialogManager
                 
                 // TODO: don't use this.character.id, instead, it should
                 // use the character designated by the dialog data
-                this.startDialog(this.dialog.next, this.character.id);
+                this.startDialog(this.dialog.next);
             }
             else
                 console.log("dialog has no action, popping state");
