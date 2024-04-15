@@ -4,7 +4,7 @@ import { DialogManager } from "../DialogManager.js";
 
 export class SingleCharacterDialogState extends State
 {
-    async init(dialogId, environmentId = null)
+    async init(dialogId)
     {
         this.dialogManager = new DialogManager();
 	await this.dialogManager.loadDialog();
@@ -18,6 +18,6 @@ export class SingleCharacterDialogState extends State
         
         await this.dialogManager.character.hide();
         
-        this.characterManager.characterContainerElement.remove();
+        this.dialogManager.characterManager.characterContainerElement.remove();
     }
 }
