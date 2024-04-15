@@ -39,6 +39,7 @@ export class DialogManager
         await sleep(500);
 
         this.dialogBoxElement.remove();
+    	this.dialogBoxButton = null;
 
         $(document).off('keydown', async () => { await this.advanceDialog(); });
     }
