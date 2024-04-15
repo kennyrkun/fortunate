@@ -12,7 +12,7 @@ export class DialogManager
         this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
 
-	this.characterManager = null;
+		this.characterManager = null;
         this.character        = null;
         
         this.dialog     = null;
@@ -146,10 +146,12 @@ export class DialogManager
                 // use the character designated by the dialog data
                 await this.startDialog(this.dialog.next);
             }
-	
-	    console.log("dialog has no action, popping state");
-            stateMachine.popState();
-            return;
+		    else
+		    {
+			    console.log("dialog has no action, popping state");
+	            stateMachine.popState();
+	            return;
+	    	}
         }
 
         this.dialogBoxTextElement.empty();
