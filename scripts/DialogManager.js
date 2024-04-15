@@ -1,6 +1,8 @@
 import { Character        } from "./Character.js";
 import { CharacterManager } from "./CharacterManager.js";
 
+import { EnvironmentNavigationState } from "./states/EnvironmentNavigationState.js";
+
 export class DialogManager
 {
     constructor()
