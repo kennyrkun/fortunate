@@ -2,7 +2,7 @@ import { CharacterManager } from "./CharacterManager.js";
 
 export class DialogManager
 {
-    async constructor()
+    constructor()
     {
         this.dialogBoxElement         = null;
         this.dialogBoxTextElement     = null;
