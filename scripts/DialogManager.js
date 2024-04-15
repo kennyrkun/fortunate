@@ -38,7 +38,7 @@ export class DialogManager
         $(document).off('keydown', () => { this.advanceDialog(); });
     }
 
-    startDialog(dialogId)
+    async startDialog(dialogId)
     {
         console.log("load dialog");
 
