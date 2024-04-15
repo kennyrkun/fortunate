@@ -61,7 +61,7 @@ export class DialogManager
                 const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxButtonContainer);
 
                 if ("next" in option)
-                    button.click(() => { await this.startDialog(option.next, 2) });
+                    button.click(async () => { await this.startDialog(option.next, 2) });
                 // TODO: button to go to a new scene
             }
         }
