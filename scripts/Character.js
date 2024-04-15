@@ -7,7 +7,7 @@ export class Character
         this.id = character.id;
         this.name = character.name;
 
-        this.element = $(`<img src="images/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`);
+        this.element = $(`<img src="images/characters/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`);
     }
 
     async show(fadeTime = 2000)
