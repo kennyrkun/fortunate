@@ -2,7 +2,7 @@ import { CharacterManager } from "./CharacterManager.js";
 
 export class DialogManager
 {
-    constructor()
+    async constructor()
     {
         this.dialogBoxElement         = null;
         this.dialogBoxTextElement     = null;
@@ -12,7 +12,9 @@ export class DialogManager
         this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
 
-        this.characterManager = null;
+	this.characterManager = new CharacterManager();
+        await this.characterManager.loadCharacters();
+	    
         this.character        = null;
         
         this.dialog     = null;
@@ -47,9 +49,6 @@ export class DialogManager
         this.clearDialogBox();
 
         this.dialog = this.getDialog(dialogId);
-
-        this.characterManager = new CharacterManager();
-        await this.characterManager.loadCharacters();
 	    
         this.character = this.characterManager.getCharacter(this.dialog.character);
 
