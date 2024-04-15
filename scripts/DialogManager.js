@@ -118,6 +118,9 @@ export class DialogManager
 
     async advanceDialog()
     {
+		if ("option" in this.dialog)
+			return;
+		
         this.dialogBoxButtonContainer.hide();
         
         if (this.dialog.currentDialog >= this.dialog.dialog.length - 1)
@@ -146,11 +149,6 @@ export class DialogManager
                 // use the character designated by the dialog data
                 await this.startDialog(this.dialog.next);
             }
-			else if ("option" in this.dialog)
-			{
-				console.log("advance dialog was called on option dialog, ignoring");
-				return;
-			}
 		    else
 		    {
 			    console.log("dialog has no action, popping state");
