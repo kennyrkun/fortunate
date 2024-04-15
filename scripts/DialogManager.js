@@ -12,9 +12,7 @@ export class DialogManager
         this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
 
-	this.characterManager = new CharacterManager();
-        await this.characterManager.loadCharacters();
-	    
+	this.characterManager = null;
         this.character        = null;
         
         this.dialog     = null;
@@ -26,6 +24,9 @@ export class DialogManager
         this.dialogData = await $.getJSON("./data/dialog.json");
 
         console.log("loaded dialog data", this.dialogData);
+
+    	this.characterManager = new CharacterManager();
+        await this.characterManager.loadCharacters();
     }
 
     async clearDialogBox()
