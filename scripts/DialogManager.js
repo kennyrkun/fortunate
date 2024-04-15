@@ -145,9 +145,8 @@ export class DialogManager
                 // use the character designated by the dialog data
                 await this.startDialog(this.dialog.next);
             }
-            else
-                console.log("dialog has no action, popping state");
-
+	
+	    console.log("dialog has no action, popping state");
             stateMachine.popState();
             return;
         }
