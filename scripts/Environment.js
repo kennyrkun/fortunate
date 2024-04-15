@@ -28,10 +28,7 @@ export class Environment
 
                 if (this.attributes.click.action == "dialog")
                 {
-                    stateMachine.pushState(new SingleCharacterDialogState(
-                        this.attributes.click.character,
-                        this.attributes.click.dialog
-                    ));
+                    stateMachine.pushState(new SingleCharacterDialogState(this.attributes.click.dialog));
                 }
                 else if (this.attributes.click.action == "changeEnvironment")
                 {
