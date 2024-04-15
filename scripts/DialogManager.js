@@ -145,6 +145,8 @@ export class DialogManager
                     stateMachine.pushState(newState);
                 else
                     console.error("dialog had action but it's type was invalid, popping state");
+
+				return;
             }
             else if ("next" in this.dialog)
             {
@@ -153,13 +155,15 @@ export class DialogManager
                 // TODO: don't use this.character.id, instead, it should
                 // use the character designated by the dialog data
                 await this.startDialog(this.dialog.next);
+
+				return;
             }
 		    else
 		    {
 			    console.log("dialog has no action, popping state");
-	            stateMachine.popState();
-	            return;
-	    	}
+			    stateMachine.popState();
+			    return;
+			}
         }
 
         this.dialogBoxTextElement.empty();
