@@ -61,7 +61,7 @@ export class DialogManager
                 const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxButtonContainer);
 
                 if ("next" in option)
-                    button.click(() => { this.startDialog(option.next, 2) });
+                    button.click(() => { await this.startDialog(option.next, 2) });
                 // TODO: button to go to a new scene
             }
         }
@@ -142,7 +142,7 @@ export class DialogManager
                 
                 // TODO: don't use this.character.id, instead, it should
                 // use the character designated by the dialog data
-                this.startDialog(this.dialog.next);
+                await this.startDialog(this.dialog.next);
             }
             else
                 console.log("dialog has no action, popping state");
