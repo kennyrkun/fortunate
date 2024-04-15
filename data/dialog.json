@@ -3,12 +3,14 @@
         "dialog": [
             "That's too far out of the way into town.",
             "Maybe I can check it out on my way back."
-        ]
+        ],
+        "character": 1
     },
     "2": {
         "dialog": [
             "Whoa bud, everthin' alright?"
         ],
+        "character": 2,
         "next": 3
     },
     "3": {
@@ -21,7 +23,8 @@
                 "dialog": "Just a little lost it seems, do you know if there's a town nearby?",
                 "next": 5
             }
-        ]
+        ],
+        "character": 1
     },
     "4": {
         "dialog": [
@@ -30,6 +33,7 @@
             "There's a town down this road here.",
             "I'm headed that way now to run some errands. I can show you the way, if you'd like."
         ],
+        "character": 2,
         "next": 6
     },
     "5": {
@@ -37,6 +41,7 @@
             "Yeah, I do actually! I was headed into town to run some errands.",
             "You're more than welcome to tag along."
         ],
+        "character": 2,
         "next": 6
     },
     "6": {
@@ -44,6 +49,7 @@
             "Oh, where are my manners? I forgot to introduce myself!",
             "I'm Tate, and it's nice to meet you!"
         ],
+        "character": 2,
         "action": {
             "type": "pushEnvironment",
             "environment": "town"
@@ -53,11 +59,13 @@
         "dialog": [
             "See that mountain? You can buy it.",
             "(In a DLC for the price of a real mountain.)"
-        ]
+        ],
+        "character": 1
     },
     "8": {
         "dialog": [
             "I can't go in here right now."
-        ]
+        ],
+        "character": 1
     }
 }
