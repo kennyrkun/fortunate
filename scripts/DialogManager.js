@@ -53,7 +53,7 @@ export class DialogManager
 	    
         this.character = this.characterManager.getCharacter(this.dialog.character);
 
-        this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${character.name}</div></div>`).appendTo(document.body);
+        this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
         this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
 
         if ("option" in this.dialog)
@@ -63,7 +63,7 @@ export class DialogManager
                 const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxButtonContainer);
 
                 if ("next" in option)
-                    button.click(async () => { await this.startDialog(option.next, 2) });
+                    button.click(async () => { await this.startDialog(option.next) });
                 // TODO: button to go to a new scene
             }
         }
