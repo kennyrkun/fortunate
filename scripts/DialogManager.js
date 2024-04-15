@@ -1,3 +1,4 @@
+import { Character        } from "./Character.js";
 import { CharacterManager } from "./CharacterManager.js";
 
 export class DialogManager
