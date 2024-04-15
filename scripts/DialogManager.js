@@ -98,6 +98,8 @@ export class DialogManager
 
     startTextAnimation()
     {
+		console.log("starting text animation");
+	    
         this.textAnimationInterval = setInterval(() =>
         {
             if (this.dialog.tempTextCopy.length > 0)
