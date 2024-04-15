@@ -73,10 +73,10 @@ export class DialogManager
             this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(this.dialogBoxElement);
             
             this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
-            this.dialogBoxButton.click(async () => { await this.advanceDialog(); });
+            this.dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
             // TODO: put this on the dialog box itself, not the document
             // TODO: make this finish the text box instead of immediately sdkipping it
-            $(document).keydown(async () => { await this.advanceDialog(); });
+            $(document).keydown(async () => { console.log("skip button"); await this.advanceDialog(); });
     
             this.dialog.currentDialog = 0;
             this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
