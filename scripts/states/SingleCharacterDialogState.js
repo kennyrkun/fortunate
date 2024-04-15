@@ -1,6 +1,5 @@
 import { State } from "./State.js";
 
-import { CharacterManager } from "../CharacterManager.js";
 import { DialogManager } from "../DialogManager.js";
 
 export class SingleCharacterDialogState extends State
