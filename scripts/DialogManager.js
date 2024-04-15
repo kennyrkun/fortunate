@@ -51,7 +51,7 @@ export class DialogManager
         this.characterManager = new CharacterManager();
         await this.characterManager.loadCharacters();
 	    
-        this.character = this.characterManager.getCharacter(characterId);
+        this.character = this.characterManager.getCharacter(this.dialog.character);
 
         this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${character.name}</div></div>`).appendTo(document.body);
         this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
