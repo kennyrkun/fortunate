@@ -11,7 +11,6 @@ export class DialogManager
         this.dialogBoxTextElement     = null;
         this.dialogBoxButtonContainer = null;
 		this.dialogBoxChoiceContainer = null;
-        this.dialogBoxButton          = null;
 
         this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
@@ -35,7 +34,6 @@ export class DialogManager
 
         // delete the element so it can be recreated later
         this.dialogBoxElement.remove();
-    	this.dialogBoxButton = null;
 
         // remove the advance dialog hotkey from the document
         $(document).off("keydown", () => { this.finishTextAnimation(); });
@@ -84,8 +82,9 @@ export class DialogManager
 			this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
 			
             this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(this.dialogBoxElement);
-            this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
-            this.dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
+			
+            const dialogBoxButton = $(`<button id="advanceDialog">Next</button>`).appendTo(this.dialogBoxButtonContainer);
+            dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
 
             // TODO: put this on the dialog box itself, not the document
             // TODO: make this finish the text box instead of immediately sdkipping it
@@ -142,7 +141,7 @@ export class DialogManager
         this.dialogBoxTextElement.text(this.dialog.dialog[this.dialog.currentDialog]);
 
         this.dialogBoxButtonContainer.show();
-        this.dialogBoxButton.focus();
+        $("#advanceDialog").focus();
     }
 
     async advanceDialog()
