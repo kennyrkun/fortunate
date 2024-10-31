@@ -16,6 +16,8 @@ export class SingleCharacterDialogState extends State
         await this.dialogManager.clearDialogBox();
         
         await this.dialogManager.character.hide();
+
+        this.dialogManager.character.element.remove();
         
         this.dialogManager.characterManager.characterContainerElement.remove();
     }
