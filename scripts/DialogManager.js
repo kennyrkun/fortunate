@@ -15,7 +15,7 @@ export class DialogManager
         this.textAnimationTime     = 75;
         this.textAnimationInterval = null;
 
-	this.characterManager = null;
+	    this.characterManager = null;
         this.character        = null;
         
         this.dialog     = null;
@@ -110,8 +110,9 @@ export class DialogManager
 
     startTextAnimation()
     {
-		console.log("starting text animation");
+        console.log("starting text animation");
 	    
+        clearInterval(this.textAnimationInterval);
         this.textAnimationInterval = setInterval(() =>
         {
             if (this.dialog.tempTextCopy.length > 0)

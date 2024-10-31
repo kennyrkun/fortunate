@@ -7,7 +7,7 @@ export class SingleCharacterDialogState extends State
     async init(dialogId)
     {
         this.dialogManager = new DialogManager();
-	await this.dialogManager.loadDialog();
+	    await this.dialogManager.loadDialog();
 
         this.dialogBox = await this.dialogManager.startDialog(dialogId);
     }
