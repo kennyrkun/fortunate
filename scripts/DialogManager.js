@@ -62,7 +62,6 @@ export class DialogManager
             console.log("Reusing character currently on screen");
 
         this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
-        this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
 
         if ("option" in this.dialog)
         {
@@ -79,8 +78,9 @@ export class DialogManager
         }
         else
         {
+			this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
+			
             this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(this.dialogBoxElement);
-            
             this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
             this.dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
 
