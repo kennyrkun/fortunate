@@ -38,7 +38,7 @@ export class DialogManager
     	this.dialogBoxButton = null;
 
         // remove the advance dialog hotkey from the document
-        $(document).off(() => { this.finishTextAnimation(); });
+        $(document).off("keydown", () => { this.finishTextAnimation(); });
     }
 
     async startDialog(dialogId)
