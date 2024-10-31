@@ -35,7 +35,8 @@ export class DialogManager
         this.dialogBoxElement.remove();
     	this.dialogBoxButton = null;
 
-        $(document).off('keydown', async () => { await this.advanceDialog(); });
+        // remove the advance dialog hotkey from the document
+        $(document).off(() => { this.finishTextAnimation(); });
     }
 
     async startDialog(dialogId)
@@ -76,9 +77,11 @@ export class DialogManager
             
             this.dialogBoxButton = $(`<button class="dialog-button">Next</button>`).appendTo(this.dialogBoxButtonContainer);
             this.dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
+
             // TODO: put this on the dialog box itself, not the document
             // TODO: make this finish the text box instead of immediately sdkipping it
-            $(document).keydown(async () => { console.log("skip button"); await this.advanceDialog(); });
+            // add a hotkey to the window to skip the current dialog
+            $(document).keydown(() => { this.finishTextAnimation(); });
     
             this.dialog.currentDialog = 0;
             this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
@@ -106,20 +109,31 @@ export class DialogManager
         clearInterval(this.textAnimationInterval);
         this.textAnimationInterval = setInterval(() =>
         {
+            // if the temporary copy of the string is not empty
             if (this.dialog.tempTextCopy.length > 0)
             {
+                // add the first character of the temp to the visible string
                 this.dialogBoxTextElement.text(this.dialogBoxTextElement.text() + this.dialog.tempTextCopy[0]);
+                // remove the first character from the temp
                 this.dialog.tempTextCopy = this.dialog.tempTextCopy.slice(1);
 
                 return;
             }
 
-            clearInterval(this.textAnimationInterval);
-            console.log("text animation finished");
-
-            this.dialogBoxButtonContainer.show();
-            this.dialogBoxButton.focus();
+            this.finishTextAnimation();
         }, this.textAnimationTime);
+    }
+
+    finishTextAnimation()
+    {
+        console.log("Finished text animation.");
+
+        clearInterval(this.textAnimationInterval);
+
+        this.dialogBoxTextElement.text(this.dialog.dialog[this.dialog.currentDialog]);
+
+        this.dialogBoxButtonContainer.show();
+        this.dialogBoxButton.focus();
     }
 
     async advanceDialog()
