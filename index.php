@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>23fAd4c</title>
+		<title>
+			<?php
+				if (file_exists("./.git"))
+				{
+					$refs = file_get_contents("./.git/HEAD");
+					$ref = substr($refs, strrpos($refs, "/"));
+					$commit = file_get_contents("./.git/refs/heads/" . $ref);
+					echo htmlspecialchars($commit);
+				}
+				else
+					echo "commit unknown";
+			?>
+		</title>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
