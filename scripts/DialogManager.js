@@ -19,17 +19,8 @@ export class DialogManager
         this.character        = null;
         
         this.dialog     = null;
-        this.dialogData = null;
-    }
 
-    async loadDialog()
-    {
-        this.dialogData = await $.getJSON("./data/dialog.json");
-
-        console.log("loaded dialog data", this.dialogData);
-
-    	this.characterManager = new CharacterManager();
-        await this.characterManager.loadCharacters();
+        this.characterManager = new CharacterManager();
     }
 
     async clearDialogBox()
@@ -188,6 +179,6 @@ export class DialogManager
 
     getDialog(dialogId)
     {
-        return this.dialogData[dialogId];
+        return dialogData[dialogId];
     }
 }

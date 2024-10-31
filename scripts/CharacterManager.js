@@ -5,16 +5,8 @@ export class CharacterManager
     constructor()
     {
         this.loadedCharacters = new Map();
-        this.characterData = null;
         
         this.characterContainerElement = $(`<div id="characterContainer"></div>`).appendTo(document.body);
-    }
-
-    async loadCharacters()
-    {
-        this.characterData = await $.getJSON("./data/characters.json");
-
-        console.log("loaded character data", this.characterData);
     }
 
     getCharacter(characterId)
@@ -24,9 +16,9 @@ export class CharacterManager
         if (this.loadedCharacters.has(characterId))
             return this.loadedCharacters.get(characterId);
 
-        if (characterId in this.characterData)
+        if (characterId in characterData)
         {
-            const newCharacter = new Character(this.characterData[characterId]);
+            const newCharacter = new Character(characterData[characterId]);
             
             newCharacter.element.appendTo(this.characterContainerElement);
             

@@ -13,9 +13,7 @@ export class EnvironmentNavigationState extends State
         // TODO: do not apply this when unused
         this.envMan.environmentContainerElement.addClass("navigation");
 
-        await this.loadEnvironmentData();
-
-        this.environmentData = this.environmentData[environmentName];
+        this.environmentData = environmentData[environmentName];
 
         // add the background first
         this.envMan.addEnvironment(new Environment(
@@ -57,7 +55,7 @@ export class EnvironmentNavigationState extends State
         
         await this.envMan.hide();
         
-        console.log("paused environmentnavigationstate");
+        console.log("paused EnvironmentNavigationState");
     }
 
     async resume()
@@ -66,16 +64,7 @@ export class EnvironmentNavigationState extends State
 
         await this.envMan.show();
         
-        console.log("resumed environmentnavigationstate");
-    }
-
-    // make this a static cache so it we don't have to reload the entire
-    // environment file every time
-    async loadEnvironmentData()
-    {
-        this.environmentData = await $.getJSON("./data/environments.json");
-
-        console.log("loaded environment data", this.environmentData);
+        console.log("resumed EnvironmentNavigationState");
     }
 
     // TODO: support scaled images
