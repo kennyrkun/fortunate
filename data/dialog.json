@@ -1,8 +1,8 @@
 {
     "1": {
         "dialog": [
-            "That's too far out of the way into town.",
-            "Maybe I can check it out on my way back."
+            "That's too far out of the way.",
+            "I need to go into town, but maybe I can stop on the way back."
         ],
         "character": 1
     },
