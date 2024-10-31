@@ -29,14 +29,14 @@ export class EnvironmentNavigationState extends State
                 name, 
                 attributes
             ), fadeTime);
-
+        
         console.log(this.envMan);
 
         // wait for environment to finish fading before registering event listeners
         await this.envMan.show(fadeTime);
-    
+        
         this.registerEventListeners();
-            
+        
         console.log("added environments to navigation state");
     }
 

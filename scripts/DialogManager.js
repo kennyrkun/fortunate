@@ -44,7 +44,7 @@ export class DialogManager
 
         this.clearDialogBox();
 
-        this.dialog = this.getDialog(dialogId);
+        this.dialog = dialogData[dialogId];
 
 		if (this.character instanceof Character)
 		{
@@ -124,6 +124,7 @@ export class DialogManager
 
     async advanceDialog()
     {
+        // I think this is to prevent player choice dialogs from being skipped
 		if ("option" in this.dialog)
 			return;
 
@@ -131,6 +132,7 @@ export class DialogManager
 		
         this.dialogBoxButtonContainer.hide();
         
+        // run through all dialog strings first, then show options or change state or whatever
         if (this.dialog.currentDialog >= this.dialog.dialog.length - 1)
         {
             console.log("dialog state is over", this.dialog);
@@ -169,16 +171,12 @@ export class DialogManager
 			}
         }
 
+        // play the next dialog string
         this.dialogBoxTextElement.empty();
 
         this.dialog.currentDialog += 1;
         this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
 
         this.startTextAnimation();
-    }
-
-    getDialog(dialogId)
-    {
-        return dialogData[dialogId];
     }
 }
