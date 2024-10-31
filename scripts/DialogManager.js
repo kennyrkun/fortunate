@@ -10,6 +10,7 @@ export class DialogManager
         this.dialogBoxElement         = null;
         this.dialogBoxTextElement     = null;
         this.dialogBoxButtonContainer = null;
+		this.dialogBoxChoiceContainer = null;
         this.dialogBoxButton          = null;
 
         this.textAnimationTime     = 75;
@@ -61,13 +62,15 @@ export class DialogManager
         else
             console.log("Reusing character currently on screen");
 
-        this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
+        this.dialogBoxElement = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
         if ("option" in this.dialog)
         {
+			this.dialogBoxChoiceContainer = $(`<div class="dialog-choices"></div>`).appendTo(this.dialogBoxElement);
+			
             for (const option of this.dialog.option)
             {
-                const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxElement);
+                const button = $(`<button class="dialog-button">${option.dialog}</button>`).appendTo(this.dialogBoxChoiceContainer);
 
                 if ("next" in option)
                     button.click(async () => { await this.startDialog(option.next) });
