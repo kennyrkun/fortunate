@@ -45,8 +45,8 @@
 {
     display: inline;
 
-    position: relative;
-    top: -62px;
+    position: absolute;
+    top: -42px;
     font-size: 25px;
     font-family: "Viner Hand";
 
