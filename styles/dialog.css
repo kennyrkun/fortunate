@@ -57,6 +57,13 @@
     background: #B4C3C1aa;
 }
 
+#dialogBox .dialog-choices
+{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
 #dialogButtons
 {
     display: none;
