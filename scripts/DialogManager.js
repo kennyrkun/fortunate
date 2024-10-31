@@ -18,7 +18,7 @@ export class DialogManager
 	    this.characterManager = null;
         this.character        = null;
         
-        this.dialog     = null;
+        this.dialog = null;
 
         this.characterManager = new CharacterManager();
     }
@@ -27,11 +27,12 @@ export class DialogManager
     {
         if (this.dialogBoxElement === null)
             return;
-            
+        
+        // remove the shown class and wait for the animation to finish
         this.dialogBoxElement.removeClass("shown");
-
         await sleep(500);
 
+        // delete the element so it can be recreated later
         this.dialogBoxElement.remove();
     	this.dialogBoxButton = null;
 
@@ -41,19 +42,24 @@ export class DialogManager
 
     async startDialog(dialogId)
     {
-        console.log("load dialog");
+        console.log("Starting dialog " + dialogId);
 
         this.clearDialogBox();
 
         this.dialog = dialogData[dialogId];
 
-		if (this.character instanceof Character)
-		{
-			this.character.hide(0);
-			this.character = null;
-		}
-	    
-        this.character = this.characterManager.getCharacter(this.dialog.character);
+        if (this.character?.id != this.dialog.character)
+        {
+            if (this.character instanceof Character)
+            {
+                await this.character.hide(1000);
+                this.character = null;
+            }
+            
+            this.character = this.characterManager.getCharacter(this.dialog.character);
+        }
+        else
+            console.log("Reusing character currently on screen");
 
         this.dialogBoxElement     = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
         this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
@@ -99,7 +105,7 @@ export class DialogManager
             this.dialogBoxElement.addClass("shown");
         }, 0);
 
-        this.character.show(0);
+        await this.character.show(1000);
     }
 
     startTextAnimation()
