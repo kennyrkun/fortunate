@@ -43,12 +43,13 @@ export class DialogManager
     {
         console.log("Starting dialog " + dialogId);
 
-        await this.clearDialogBox();
-
         this.dialog = game.dialogData[dialogId];
 
         if (this.character?.id != this.dialog.character)
         {
+            // don't clear the dialog box unless it's for a different character.
+            await this.clearDialogBox();
+
             if (this.character instanceof Character)
             {
                 await this.character.hide(window.game.config.characterFadeTime);
