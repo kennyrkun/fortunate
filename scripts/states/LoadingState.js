@@ -25,12 +25,17 @@ export class LoadingState extends State
                     <div>
                         <div>Copyright &copy; 2024</div>
                         <div>Kerris Haus</div>
+                        <div>
+                            <a href="https://emmakocialskiportfolio.weebly.com/">
+                                Emma Kocialski aka Huntress/a_bunny790
+                            </a>
+                        </div>
                         <div>Chris ._.</div>
                     </div>
                 </div>
              </div>`
         );
-
+        
         //window.addEventListener('DOMContentLoaded', async () =>
         setTimeout(async () =>
         {

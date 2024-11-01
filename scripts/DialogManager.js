@@ -22,7 +22,7 @@ export class DialogManager
 
         this.characterManager = new CharacterManager();
     }
-
+    
     async clearDialogBox()
     {
         if (this.dialogBoxElement === null)
@@ -89,7 +89,7 @@ export class DialogManager
             // TODO: put this on the dialog box itself, not the document
             // TODO: make this finish the text box instead of immediately sdkipping it
             // add a hotkey to the window to skip the current dialog
-            $(document).keydown(() => { this.finishTextAnimation(); });
+            $(document).on("keydown", () => { this.finishTextAnimation(); });
     
             this.dialog.currentDialog = 0;
             this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
