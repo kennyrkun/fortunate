@@ -65,14 +65,13 @@ export class DialogManager
         let dialogBox = $("#dialogBox");
 
         if (!dialogBox.length)
-            dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
-
-        // remove things like choices or text from the box before adding new stuff.
-        dialogBox.empty();
+            dialogBox = $(`<div id="dialogBox" class="bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
         if ("option" in this.dialog)
         {
-			this.dialogBoxChoiceContainer = $(`<div class="dialog-choices"></div>`).appendTo(dialogBox);
+            $("#dialogChoices").remove();
+
+			this.dialogBoxChoiceContainer = $(`<div id="dialogChoices"></div>`).appendTo(dialogBox);
 			
             for (const option of this.dialog.option)
             {
@@ -87,7 +86,9 @@ export class DialogManager
         }
         else
         {
-			this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(dialogBox);
+            $("#dialogText, #dialogButtons").remove();
+
+			this.dialogBoxTextElement = $(`<div id="dialogText"></div>`).appendTo(dialogBox);
 			
             this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(dialogBox);
 			
