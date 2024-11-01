@@ -61,7 +61,7 @@ export class LoadingState extends State
                 $("#progress").attr("value", 3);
 
                 $("#progressText").text("Loading game configuration");
-                window.game.config = await $.getJSON("./data/environments.json");
+                window.game.config = await $.getJSON("./data/config.json");
                 $("#progress").attr("value", 4);
 
                 resolve(true);
