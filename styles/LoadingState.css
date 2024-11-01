@@ -22,7 +22,7 @@
     color: white;
 }
 
-#loadingCover > #status
+#logoContainer
 {
     display: flex;
     align-items: center;

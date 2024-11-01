@@ -12,18 +12,20 @@ export class LoadingState extends State
 
         $("body").prepend(
             `<div id='loadingCover'>
-                 <div id='status'>
-                     <img id='kerris' src='https://kerrishaus.com/assets/logo/text-big.png'></img>
-                 </div>
-                 <div id='progressContainer'>
-                     <progress id="progress"></progress>
-                     <h1 id="progressText">Preparing...</h1>
-                 </div>
-                 <div id='help'>
+                <!--
+                <div id='logoContainer'>
+                    <img id='kerris' src='https://kerrishaus.com/assets/logo/text-big.png'></img>
+                </div>
+                 -->
+                <div id='progressContainer'>
+                    <progress id="progress"></progress>
+                    <h1 id="progressText">Preparing...</h1>
+                </div>
+                <div id='help'>
                     <div>
                         Copyright &copy;&nbsp;Kerris Haus
                     </div>
-                 </div>
+                </div>
              </div>`
         );
 
