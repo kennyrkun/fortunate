@@ -26,6 +26,8 @@ require_once("../../functions.php");
 		<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
+		<script src="https://portal.kerrishaus.com/assets/javascript/external/Sortable-1.15.2.min.js"></script>
+
 		<script src="https://kerrishaus.com/assets/scripts/jquery-3.6.0.min.js"></script>
 
 		<script src="https://portal.kerrishaus.com/assets/javascript/messages.js"></script>
@@ -35,8 +37,8 @@ require_once("../../functions.php");
 
 		<div id="editorContainer">
 			<div id="shelf">
-				<div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="characterDialog">
-					<i class="fas fa-mouse"></i><span> Character Dialog</span>
+				<div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="playerChoice">
+					<i class="fas fa-mouse"></i><span> Player Choice</span>
 				</div>
 				<div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="characterDialog">
 					<i class="fas fa-mouse"></i><span> Character Dialog</span>
