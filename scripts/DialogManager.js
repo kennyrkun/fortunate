@@ -57,8 +57,6 @@ export class DialogManager
             }
             
             this.character = this.characterManager.getCharacter(this.dialog.character);
-
-            dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
         }
         else
             console.debug("Reusing character currently on screen");
