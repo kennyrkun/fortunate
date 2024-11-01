@@ -117,6 +117,7 @@ export class DialogManager
         $(document).on("keydown", (event) => { 
             event.preventDefault();
             event.stopPropagation();
+            console.log("User requested to skip text animation");
             this.finishTextAnimation(); 
         });
 
@@ -139,8 +140,6 @@ export class DialogManager
 
     finishTextAnimation()
     {
-        console.log("Finished text animation.");
-
         clearInterval(this.textAnimationInterval);
 
         this.dialogBoxTextElement.text(this.dialog.dialog[this.dialog.currentDialog]);
@@ -150,15 +149,20 @@ export class DialogManager
 
         // TODO: I'd like to use namespaces or whatever to remove ONLY the event we added here, but this is what we have to do apparently. I have never been able to get namespaces to work.
         $(document).off("keydown");
+
+        console.log("Text animation finished.");
     }
 
     async advanceDialog()
     {
         // I think this is to prevent player choice dialogs from being skipped
 		if ("option" in this.dialog)
+        {
+            console.log("Ignoring request to advance dialog, it is a player choice box.");
 			return;
+        }
 
-		console.log("advancing dialog")
+		console.log("Advancing dialog");
 		
         this.dialogBoxButtonContainer.hide();
         
