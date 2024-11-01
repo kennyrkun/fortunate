@@ -10,12 +10,12 @@ export class Character
         this.element = $(`<img src="images/characters/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`);
     }
 
-    async show(fadeTime = 2000)
+    async show(fadeTime = window.game.config.characterFadeTime)
     {
         await this.element.fadeIn(fadeTime);
     }
 
-    async hide(fadeTime = 2000)
+    async hide(fadeTime = window.game.config.characterFadeTime)
     {
         this.element.fadeOut(fadeTime);
         

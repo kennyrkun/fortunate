@@ -1,4 +1,5 @@
 {
-	"defaultFadeTime": 1000,
+	"characterFadeTime": 2000,
+	"environmentFadeTime": 3000,
 	"textSpeed": 75
 }

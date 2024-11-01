@@ -6,7 +6,7 @@ import { EnvironmentManager } from "../EnvironmentManager.js";
 // TODO: rename this to EnvironmentState
 export class EnvironmentNavigationState extends State
 {
-    async init(environmentName, fadeTime = 3000)
+    async init(environmentName, fadeTime = window.game.config.environmentFadeTime)
     {
         this.envMan = new EnvironmentManager();
 
