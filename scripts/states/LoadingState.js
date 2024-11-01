@@ -34,7 +34,7 @@ export class LoadingState extends State
 
             new Promise(async (resolve) =>
             {
-                $("#progress").attr("max", 3);
+                $("#progress").attr("max", 4);
 
                 // TODO: have every model loaded automatically
                 $("#progressText").text("Loading dialog");
@@ -48,6 +48,10 @@ export class LoadingState extends State
                 $("#progressText").text("Loading environments");
                 window.environmentData = await $.getJSON("./data/environments.json");
                 $("#progress").attr("value", 3);
+
+                $("#progressText").text("Loading game configuration");
+                window.gameConfig = await $.getJSON("./data/environments.json");
+                $("#progress").attr("value", 4);
 
                 resolve(true);
             }).then(() =>
