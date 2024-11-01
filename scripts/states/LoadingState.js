@@ -23,7 +23,9 @@ export class LoadingState extends State
                 </div>
                 <div id='help'>
                     <div>
-                        Copyright &copy;&nbsp;Kerris Haus
+                        <div>Copyright &copy; 2024</div>
+                        <div>Kerris Haus</div>
+                        <div>Chris ._.</div>
                     </div>
                 </div>
              </div>`
