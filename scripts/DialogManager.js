@@ -22,7 +22,7 @@ export class DialogManager
 
         this.characterManager = new CharacterManager();
     }
-    
+
     async clearDialogBox()
     {
         if (this.dialogBoxElement === null)
@@ -85,11 +85,6 @@ export class DialogManager
 			
             const dialogBoxButton = $(`<button id="advanceDialog">Next</button>`).appendTo(this.dialogBoxButtonContainer);
             dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
-
-            // TODO: put this on the dialog box itself, not the document
-            // TODO: make this finish the text box instead of immediately sdkipping it
-            // add a hotkey to the window to skip the current dialog
-            $(document).on("keydown", () => { this.finishTextAnimation(); });
     
             this.dialog.currentDialog = 0;
             this.dialog.tempTextCopy = this.dialog.dialog[this.dialog.currentDialog];
@@ -115,6 +110,12 @@ export class DialogManager
         console.log("starting text animation");
 	    
         clearInterval(this.textAnimationInterval);
+
+        // TODO: put this on the dialog box itself, not the document
+        // TODO: make this finish the text box instead of immediately sdkipping it
+        // add a hotkey to the window to skip the current dialog
+        $(document).on("keydown", () => { this.finishTextAnimation(); });
+
         this.textAnimationInterval = setInterval(() =>
         {
             // if the temporary copy of the string is not empty
@@ -130,6 +131,7 @@ export class DialogManager
 
             this.finishTextAnimation();
         }, this.textAnimationTime);
+        
     }
 
     finishTextAnimation()
@@ -142,6 +144,8 @@ export class DialogManager
 
         this.dialogBoxButtonContainer.show();
         $("#advanceDialog").focus();
+
+        $(document).off("keydown", () => { this.finishTextAnimation(); });
     }
 
     async advanceDialog()
