@@ -145,7 +145,8 @@ export class DialogManager
         this.dialogBoxButtonContainer.show();
         $("#advanceDialog").focus();
 
-        $(document).off("keydown", () => { this.finishTextAnimation(); });
+        // TODO: I'd like to use namespaces or whatever to remove ONLY the event we added here, but this is what we have to do apparently. I have never been able to get namespaces to work.
+        $(document).off("keydown");
     }
 
     async advanceDialog()
