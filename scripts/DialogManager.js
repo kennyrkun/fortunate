@@ -169,11 +169,11 @@ export class DialogManager
         // run through all dialog strings first, then show options or change state or whatever
         if (this.dialog.currentDialog >= this.dialog.dialog.length - 1)
         {
-            console.log("dialog state is over", this.dialog);
+            console.log(`No more dialog remaining. (Current dialog: ${this.dialog.currentDialog} >= ${this.dialog.dialog.length - 1}`, this.dialog);
 
             if ("action" in this.dialog)
             {
-                console.log("checking dialog action");
+                console.log("Dialog has action: ", this.dialog.action);
                 
                 // TODO: configure transition time from dialog data
                 const newState = new EnvironmentNavigationState(this.dialog.action.environment);
@@ -183,23 +183,24 @@ export class DialogManager
                 else if (this.dialog.action.type == "pushEnvironment")
                     stateMachine.pushState(newState);
                 else
-                    console.error("dialog had action but it's type was invalid, popping state");
+                {
+                    console.error("Dialog action type is invalid, popping state.");
+                    stateMachine.popState();
+                }
 
 				return;
             }
             else if ("next" in this.dialog)
             {
-                console.log("moving to next dialog" + this.dialog.next);
+                console.log(`Next dialog is ${this.dialog.next}.`);
                 
-                // TODO: don't use this.character.id, instead, it should
-                // use the character designated by the dialog data
                 await this.startDialog(this.dialog.next);
 
 				return;
             }
 		    else
 		    {
-			    console.log("dialog has no action, popping state");
+			    console.log("Dialog did not contain action directive, popping state.");
 			    stateMachine.popState();
 			    return;
 			}
