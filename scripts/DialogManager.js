@@ -27,12 +27,16 @@ export class DialogManager
         if ($("#dialogBox").length <= 0)
             return;
         
+        console.debug("Removing dialog box...");
+
         // remove the shown class and wait for the animation to finish
         $("#dialogBox").removeClass("shown");
         await sleep(500);
 
         // delete the element so it can be recreated later
         $("#dialogBox").remove();
+
+        console.log("Dialog box removed.");
     }
 
     async startDialog(dialogId)
@@ -54,7 +58,7 @@ export class DialogManager
             this.character = this.characterManager.getCharacter(this.dialog.character);
         }
         else
-            console.log("Reusing character currently on screen");
+            console.debug("Reusing character currently on screen");
 
         const dialogBox = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
@@ -70,7 +74,7 @@ export class DialogManager
                     button.click(async () => { await this.startDialog(option.next) });
                 // TODO: button to go to a new scene
 
-				console.log("added option to dialog box", option);
+				console.debug("Added option to dialog box", option);
             }
         }
         else
