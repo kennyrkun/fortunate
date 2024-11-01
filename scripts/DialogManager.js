@@ -114,7 +114,11 @@ export class DialogManager
         // TODO: put this on the dialog box itself, not the document
         // TODO: make this finish the text box instead of immediately sdkipping it
         // add a hotkey to the window to skip the current dialog
-        $(document).on("keydown", () => { this.finishTextAnimation(); });
+        $(document).on("keydown", (event) => { 
+            event.preventDefault();
+            event.stopPropagation();
+            this.finishTextAnimation(); 
+        });
 
         this.textAnimationInterval = setInterval(() =>
         {
@@ -131,7 +135,6 @@ export class DialogManager
 
             this.finishTextAnimation();
         }, this.textAnimationTime);
-        
     }
 
     finishTextAnimation()
