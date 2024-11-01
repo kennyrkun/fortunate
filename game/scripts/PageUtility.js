@@ -4,7 +4,7 @@ export function addStyle(filename)
 {
     const style = document.createElement("link");
     style.setAttribute("rel", "stylesheet");
-    style.setAttribute("href", `./styles/${filename}.css`);
+    style.setAttribute("href", `./game/styles/${filename}.css`);
     style.setAttribute("id", `${filename}`);
     document.head.appendChild(style);
 

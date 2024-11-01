@@ -28,11 +28,11 @@ else
 
 		<link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/flex-utility.css">
 
-		<script src="./scripts/thirdparty/imageMapResizer.min.js"></script>
+		<script src="./game/scripts/thirdparty/imageMapResizer.min.js"></script>
 		
-		<link rel="stylesheet" href="./styles/environment.css">
-		<link rel="stylesheet" href="./styles/dialog.css">
-		<link rel="stylesheet" href="./styles/character.css">
+		<link rel="stylesheet" href="./game/styles/environment.css">
+		<link rel="stylesheet" href="./game/styles/dialog.css">
+		<link rel="stylesheet" href="./game/styles/character.css">
 	</head>
 
 	<body>
@@ -54,10 +54,10 @@ else
 	    </style>
 	    
 		<script type="module" id="game">
-		    import { StateMachine } from "./scripts/states/StateMachine.js";
-		    import { State        } from "./scripts/states/State.js";
+		    import { StateMachine } from "./game/scripts/states/StateMachine.js";
+		    import { State        } from "./game/scripts/states/State.js";
 
-			import { LoadingState } from "./scripts/states/LoadingState.js";
+			import { LoadingState } from "./game/scripts/states/LoadingState.js";
 		    
 		    let sleepSetTimeout_ctrl;
 
