@@ -330,12 +330,12 @@ require_once("../../functions.php");
             editor.addNode('personalized', 1, 1, pos_x, pos_y, 'personalized', {}, personalized );
             break;
 		case "characterDialog":
-			let personalized = `
+			let characterDialog = `
             <div>
 				<input type="text" df-db-key placeholder="DB key">
 			</div>
             `;
-            editor.addNode('personalized', 1, 1, pos_x, pos_y, 'personalized', {}, personalized );
+            editor.addNode('characterDialog', 1, 1, pos_x, pos_y, 'characterDialog', {}, characterDialog );
             break;
 			break;
 
