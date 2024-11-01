@@ -51,7 +51,7 @@
         ],
         "character": 2,
         "action": {
-            "type": "pushEnvironment",
+            "type": "changeEnvironment",
             "environment": "town"
         }
     },
