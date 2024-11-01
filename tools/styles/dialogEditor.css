@@ -1,0 +1,15 @@
+#editorContainer
+{
+    display: flex;
+    width: 100%;
+}
+
+#shelf
+{
+    
+}
+
+#editor
+{
+    flex-grow: 1;
+}

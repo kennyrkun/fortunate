@@ -6,99 +6,98 @@ require_once("../../functions.php");
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title><?= $commit ?> dialog editor</title>
-  <meta name="description" content="Simple library for flow programming. Drawflow allows you to create data flows easily and quickly.">
-</head>
-<body>
-  <script src="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow@0.0.48/dist/drawflow.min.css">
-  <link rel="stylesheet" type="text/css" href="../styles/thirdparty/jerosoler/beautiful.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-  <script src="https://kerrishaus.com/assets/scripts/jquery-3.6.0.min.js"></script>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?= $commit ?> dialog editor</title>
+  </head>
+
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    
+    <script src="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow@0.0.48/dist/drawflow.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../styles/thirdparty/jerosoler/beautiful.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="https://kerrishaus.com/assets/scripts/jquery-3.6.0.min.js"></script>
+
     <script src="https://portal.kerrishaus.com/assets/javascript/messages.js"></script>
     <link rel="stylesheet" href="https://portal.kerrishaus.com/assets/styles/messages.css">
+
     <script src="../scripts/dialogEditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/dialogEditor.css" />
 
-
-  <header>
-    <h2>Drawflow</h2>
-    <div class="github-link"><a href="https://github.com/jerosoler/Drawflow" target="_blank"><i class="fab fa-github fa-3x"></i></a></div>
-    <div class="them-edit-link"><a href="https://jerosoler.github.io/drawflow-theme-generator/" target="_blank">🎨</a></div>
-  </header>
-  <div class="wrapper">
-    <div class="col">
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="facebook">
-        <i class="fab fa-facebook"></i><span> Facebook</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="slack">
-        <i class="fab fa-slack"></i><span> Slack receive message</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="github">
-        <i class="fab fa-github"></i><span> Github Star</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="telegram">
-        <i class="fab fa-telegram"></i><span> Telegram send message</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="aws">
-        <i class="fab fa-aws"></i><span> AWS</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="log">
-        <i class="fas fa-file-signature"></i><span> File Log</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="google">
-        <i class="fab fa-google-drive"></i><span> Google Drive save</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="email">
-        <i class="fas fa-at"></i><span> Email send</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="template">
-        <i class="fas fa-code"></i><span> Template</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="multiple">
-        <i class="fas fa-code-branch"></i><span> Multiple inputs/outputs</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="personalized">
-        <i class="fas fa-fill"></i><span> Personalized</span>
-      </div>
-      <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="dbclick">
-        <i class="fas fa-mouse"></i><span> DBClick!</span>
-      </div>
-
-
-    </div>
-    <div class="col-right">
-      <div class="menu">
-        <ul>
-          <li onclick="editor.changeModule('Home'); changeModule(event);" class="selected">Home</li>
-          <li onclick="editor.changeModule('Other'); changeModule(event);">Other Module</li>
-        </ul>
-      </div>
-      <div id="drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
-
-        <div class="btn-export" onclick="Swal.fire({ title: 'Export',
-        html: '<pre><code>'+JSON.stringify(editor.export(), null,4)+'</code></pre>'
-        })">Export</div>
-        <div class="btn-clear" onclick="editor.clearModuleSelected()">Clear</div>
-        <div class="btn-lock">
-          <i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
-          <i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');" style="display:none;"></i>
+    <div id="editorContainer">
+      <div id="shelf">
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="facebook">
+			<i class="fab fa-facebook"></i><span> Facebook</span>
         </div>
-        <div class="bar-zoom">
-          <i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
-          <i class="fas fa-search" onclick="editor.zoom_reset()"></i>
-          <i class="fas fa-search-plus" onclick="editor.zoom_in()"></i>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="slack">
+          	<i class="fab fa-slack"></i><span> Slack receive message</span>
         </div>
-      </div>
-    </div>
-  </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="github">
+          	<i class="fab fa-github"></i><span> Github Star</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="telegram">
+          	<i class="fab fa-telegram"></i><span> Telegram send message</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="aws">
+        	<i class="fab fa-aws"></i><span> AWS</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="log">
+			<i class="fas fa-file-signature"></i><span> File Log</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="google">
+          	<i class="fab fa-google-drive"></i><span> Google Drive save</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="email">
+          	<i class="fas fa-at"></i><span> Email send</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="template">
+          	<i class="fas fa-code"></i><span> Template</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="multiple">
+          	<i class="fas fa-code-branch"></i><span> Multiple inputs/outputs</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="personalized">
+          	<i class="fas fa-fill"></i><span> Personalized</span>
+        </div>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="dbclick">
+          	<i class="fas fa-mouse"></i><span> DBClick!</span>
+        </div>
+	</div>
+
+	<div id="editor">
+	    <div class="menu">
+        	<ul>
+          		<li onclick="editor.changeModule('Home'); changeModule(event);" class="selected">Home</li>
+          		<li onclick="editor.changeModule('Other'); changeModule(event);">Other Module</li>
+        	</ul>
+      	</div>
+      	<div id="drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
+        	<div class="btn-export" onclick="Swal.fire({ title: 'Export',
+			html: '<pre><code>'+JSON.stringify(editor.export(), null,4)+'</code></pre>'
+			})">Export</div>
+        		<div class="btn-clear" onclick="editor.clearModuleSelected()">Clear</div>
+        			<div class="btn-lock">
+          				<i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
+          				<i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');" style="display:none;"></i>
+        			</div>
+        			<div class="bar-zoom">
+          				<i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
+          				<i class="fas fa-search" onclick="editor.zoom_reset()"></i>
+          				<i class="fas fa-search-plus" onclick="editor.zoom_in()"></i>
+        			</div>
+      			</div>
+    		</div>
+  		</div>
 
   <script>
     var id = document.getElementById("drawflow");
@@ -139,7 +138,6 @@ require_once("../../functions.php");
     `;
 */
 
-
     //editor.addNode(name, inputs, outputs, posx, posy, class, data, html);
     /*editor.addNode('welcome', 0, 0, 50, 50, 'welcome', {}, welcome );
     editor.addModule('Other');
@@ -176,9 +174,11 @@ require_once("../../functions.php");
       console.log(connection);
     })
 
+	/*
     editor.on('mouseMove', function(position) {
       console.log('Position mouse x:' + position.x + ' y:'+ position.y);
     })
+	*/
 
     editor.on('nodeMoved', function(id) {
       console.log("Node moved " + id);
@@ -188,9 +188,11 @@ require_once("../../functions.php");
       console.log('Zoom level ' + zoom);
     })
 
+	/*
     editor.on('translate', function(position) {
       console.log('Translate x:' + position.x + ' y:'+ position.y);
     })
+	*/
 
     editor.on('addReroute', function(id) {
       console.log("Reroute added " + id);
