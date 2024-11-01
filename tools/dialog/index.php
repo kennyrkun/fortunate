@@ -69,8 +69,8 @@ require_once("../../functions.php");
         <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="personalized">
           	<i class="fas fa-fill"></i><span> Personalized</span>
         </div>
-        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="dbclick">
-          	<i class="fas fa-mouse"></i><span> DBClick!</span>
+        <div class="drag-drawflow" draggable="true" ondragstart="drag(event)" data-node="characterDialog">
+          	<i class="fas fa-mouse"></i><span> Character Dialog</span>
         </div>
 	</div>
 
@@ -324,30 +324,20 @@ require_once("../../functions.php");
           case 'personalized':
             var personalized = `
             <div>
-              Personalized
-            </div>
+				<input type="text" df-db-key placeholder="DB key">
+			</div>
             `;
             editor.addNode('personalized', 1, 1, pos_x, pos_y, 'personalized', {}, personalized );
             break;
-          case 'dbclick':
-            var dbclick = `
+		case "characterDialog":
+			let personalized = `
             <div>
-            <div class="title-box"><i class="fas fa-mouse"></i> Db Click</div>
-              <div class="box dbclickbox" ondblclick="showpopup(event)">
-                Db Click here
-                <div class="modal" style="display:none">
-                  <div class="modal-content">
-                    <span class="close" onclick="closemodal(event)">&times;</span>
-                    Change your variable {name} !
-                    <input type="text" df-name>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+				<input type="text" df-db-key placeholder="DB key">
+			</div>
             `;
-            editor.addNode('dbclick', 1, 1, pos_x, pos_y, 'dbclick', { name: ''}, dbclick );
+            editor.addNode('personalized', 1, 1, pos_x, pos_y, 'personalized', {}, personalized );
             break;
+			break;
 
         default:
       }
