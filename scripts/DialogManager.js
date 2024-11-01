@@ -45,7 +45,7 @@ export class DialogManager
 
         this.clearDialogBox();
 
-        this.dialog = dialogData[dialogId];
+        this.dialog = game.dialogData[dialogId];
 
         if (this.character?.id != this.dialog.character)
         {

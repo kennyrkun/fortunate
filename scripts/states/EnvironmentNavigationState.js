@@ -13,7 +13,8 @@ export class EnvironmentNavigationState extends State
         // TODO: do not apply this when unused
         this.envMan.environmentContainerElement.addClass("navigation");
 
-        this.environmentData = environmentData[environmentName];
+        // store just the specific environment we want to use
+        this.environmentData = game.environmentData[environmentName];
 
         // add the background first
         this.envMan.addEnvironment(new Environment(

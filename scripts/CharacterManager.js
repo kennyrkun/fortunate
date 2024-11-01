@@ -16,9 +16,9 @@ export class CharacterManager
         if (this.loadedCharacters.has(characterId))
             return this.loadedCharacters.get(characterId);
 
-        if (characterId in characterData)
+        if (characterId in game.characterData)
         {
-            const newCharacter = new Character(characterData[characterId]);
+            const newCharacter = new Character(game.characterData[characterId]);
             
             newCharacter.element.appendTo(this.characterContainerElement);
             
