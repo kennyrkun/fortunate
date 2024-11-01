@@ -43,7 +43,7 @@ export class DialogManager
     {
         console.log("Starting dialog " + dialogId);
 
-        this.clearDialogBox();
+        await this.clearDialogBox();
 
         this.dialog = game.dialogData[dialogId];
 
@@ -60,7 +60,7 @@ export class DialogManager
         else
             console.debug("Reusing character currently on screen");
 
-        const dialogBox = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
+        const dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
         if ("option" in this.dialog)
         {
