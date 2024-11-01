@@ -75,12 +75,6 @@ require_once("../../functions.php");
 	</div>
 
 	<div id="editor">
-	    <div class="menu">
-        	<ul>
-          		<li onclick="editor.changeModule('Home'); changeModule(event);" class="selected">Home</li>
-          		<li onclick="editor.changeModule('Other'); changeModule(event);">Other Module</li>
-        	</ul>
-      	</div>
       	<div id="drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
         	<div class="btn-export" onclick="Swal.fire({ title: 'Export',
 			html: '<pre><code>'+JSON.stringify(editor.export(), null,4)+'</code></pre>'

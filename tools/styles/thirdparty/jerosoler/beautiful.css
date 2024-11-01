@@ -14,49 +14,6 @@
     font-family: 'Roboto', sans-serif;
   }
   
-  header {
-    height: 66px;
-    border-bottom: 1px solid var(--border-color);
-    padding-left: 20px;
-  }
-  header h2 {
-    margin: 0px;
-    line-height: 66px;
-  }
-  header a {
-    color: black;
-  }
-  .them-edit-link {
-    position: absolute;
-    top: 10px;
-    right: 100px;
-    color: black;
-    font-size: 40px;
-  }
-  .them-edit-link a {
-    text-decoration: none;
-  }
-  
-  .github-link{
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: black;
-  }
-  
-  .wrapper {
-    width: 100%;
-    height: calc(100vh - 67px);
-    display: flex;
-  }
-  
-  .col {
-    overflow: auto;
-    width: 300px;
-    height: 100%;
-    border-right: 1px solid var(--border-color);
-  }
-  
   .drag-drawflow {
     line-height: 50px;
     border-bottom: 1px solid var(--border-color);
@@ -162,10 +119,7 @@
   }
   
   #drawflow {
-    position: relative;
-    width: calc(100vw - 301px);
-    height: calc(100% - 50px);
-    top: 40px;
+    height: 100%;
     background: var(--background-color);
     background-size: 25px 25px;
     background-image:
