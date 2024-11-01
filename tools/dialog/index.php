@@ -13,10 +13,11 @@ require_once("../../functions.php");
   <title><?= $commit ?> dialog editor</title>
 </head>
 <body>
-  <script src="drawflow.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/jerosoler/Drawflow/dist/drawflow.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="src/drawflow.css" />
-  <link rel="stylesheet" type="text/css" href="docs/beautiful.css" />
+  <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/jerosoler/Drawflow/4941d25a9949d92d12146667eae33f270f2dd830/src/drawflow.css" />
+  <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/jerosoler/Drawflow/4941d25a9949d92d12146667eae33f270f2dd830/docs/beautiful.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
