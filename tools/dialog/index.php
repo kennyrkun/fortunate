@@ -101,42 +101,6 @@ require_once("../../functions.php");
     editor.start();
     editor.import(dataToImport);
 
-
-  /*
-    var welcome = `
-    <div>
-      <div class="title-box">👏 Welcome!!</div>
-      <div class="box">
-        <p>Simple flow library <b>demo</b>
-        <a href="https://github.com/jerosoler/Drawflow" target="_blank">Drawflow</a> by <b>Jero Soler</b></p><br>
-
-        <p>Multiple input / outputs<br>
-           Data sync nodes<br>
-           Import / export<br>
-           Modules support<br>
-           Simple use<br>
-           Type: Fixed or Edit<br>
-           Events: view console<br>
-           Pure Javascript<br>
-        </p>
-        <br>
-        <p><b><u>Shortkeys:</u></b></p>
-        <p>🎹 <b>Delete</b> for remove selected<br>
-        💠 Mouse Left Click == Move<br>
-        ❌ Mouse Right == Delete Option<br>
-        🔍 Ctrl + Wheel == Zoom<br>
-        📱 Mobile support<br>
-        ...</p>
-      </div>
-    </div>
-    `;
-*/
-
-    //editor.addNode(name, inputs, outputs, posx, posy, class, data, html);
-    /*editor.addNode('welcome', 0, 0, 50, 50, 'welcome', {}, welcome );
-    editor.addModule('Other');
-    */
-
     // Events!
     editor.on('nodeCreated', function(id) {
       console.log("Node created " + id);
