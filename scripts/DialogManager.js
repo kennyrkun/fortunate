@@ -67,6 +67,9 @@ export class DialogManager
         if (!dialogBox.length)
             dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
+        // remove things like choices or text from the box before adding new stuff.
+        dialogBox.empty();
+
         if ("option" in this.dialog)
         {
 			this.dialogBoxChoiceContainer = $(`<div class="dialog-choices"></div>`).appendTo(dialogBox);
