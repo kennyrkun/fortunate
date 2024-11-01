@@ -136,7 +136,7 @@ export class DialogManager
             if (this.dialog.tempTextCopy.length > 0)
             {
                 // add the first character of the temp to the visible string
-                this.dialogBoxTextElement.text(this.dialogBoxTextElement.text() + this.dialog.tempTextCopy.substr(2));
+                this.dialogBoxTextElement.text(this.dialogBoxTextElement.text() + this.dialog.tempTextCopy.substr(0, 2));
                 // remove the first character from the temp
                 this.dialog.tempTextCopy = this.dialog.tempTextCopy.slice(2);
 
