@@ -7,7 +7,6 @@ export class DialogManager
 {
     constructor()
     {
-        this.dialogBoxElement         = null;
         this.dialogBoxTextElement     = null;
         this.dialogBoxButtonContainer = null;
 		this.dialogBoxChoiceContainer = null;
@@ -25,18 +24,15 @@ export class DialogManager
 
     async clearDialogBox()
     {
-        if (this.dialogBoxElement === null)
+        if ($("#dialogBox").length <= 0)
             return;
         
         // remove the shown class and wait for the animation to finish
-        this.dialogBoxElement.removeClass("shown");
+        $("#dialogBox").removeClass("shown");
         await sleep(500);
 
         // delete the element so it can be recreated later
-        this.dialogBoxElement.remove();
-
-        // remove the advance dialog hotkey from the document
-        $(document).off("keydown", () => { this.finishTextAnimation(); });
+        $("#dialogBox").remove();
     }
 
     async startDialog(dialogId)
@@ -51,7 +47,7 @@ export class DialogManager
         {
             if (this.character instanceof Character)
             {
-                await this.character.hide(1000);
+                await this.character.hide(window.game.config.characterFadeTime);
                 this.character = null;
             }
             
@@ -60,11 +56,11 @@ export class DialogManager
         else
             console.log("Reusing character currently on screen");
 
-        this.dialogBoxElement = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
+        const dialogBox = $(`<div class="dialog-box bottom" id="dialogBox"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
         if ("option" in this.dialog)
         {
-			this.dialogBoxChoiceContainer = $(`<div class="dialog-choices"></div>`).appendTo(this.dialogBoxElement);
+			this.dialogBoxChoiceContainer = $(`<div class="dialog-choices"></div>`).appendTo(dialogBox);
 			
             for (const option of this.dialog.option)
             {
@@ -79,9 +75,9 @@ export class DialogManager
         }
         else
         {
-			this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(this.dialogBoxElement);
+			this.dialogBoxTextElement = $(`<div class="dialog-text"></div>`).appendTo(dialogBox);
 			
-            this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(this.dialogBoxElement);
+            this.dialogBoxButtonContainer = $(`<div id="dialogButtons" style="display: none;"></div>`).appendTo(dialogBox);
 			
             const dialogBoxButton = $(`<button id="advanceDialog">Next</button>`).appendTo(this.dialogBoxButtonContainer);
             dialogBoxButton.click(async () => { console.log("advance button clicked"); await this.advanceDialog(); });
@@ -99,10 +95,10 @@ export class DialogManager
 
         setTimeout(() =>
         {
-            this.dialogBoxElement.addClass("shown");
+            dialogBox.addClass("shown");
         }, 0);
 
-        await this.character.show(1000);
+        await this.character.show(window.game.config.characterFadeTime);
     }
 
     startTextAnimation()

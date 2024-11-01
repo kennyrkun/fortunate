@@ -11,7 +11,7 @@ export class CharacterManager
 
     getCharacter(characterId)
     {
-        console.log("retrieving character " + characterId);
+        console.log(`Creating character ${characterId}.`);
 
         if (this.loadedCharacters.has(characterId))
             return this.loadedCharacters.get(characterId);
@@ -25,7 +25,7 @@ export class CharacterManager
             return newCharacter;
         }
     
-        console.error(characterId + " does not exist in characterData");
+        console.error(`${characterId} does not exist in characterData.`);
         return null;
     }
 }
