@@ -24,7 +24,7 @@ export class DialogManager
 
     async clearDialogBox()
     {
-        if ($("#dialogBox").length <= 0)
+        if (!$("#dialogBox").length)
             return;
         
         console.debug("Removing dialog box...");
@@ -57,11 +57,17 @@ export class DialogManager
             }
             
             this.character = this.characterManager.getCharacter(this.dialog.character);
+
+            dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
         }
         else
             console.debug("Reusing character currently on screen");
 
-        const dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
+        // only create new dialogbox if one does not exist
+        let dialogBox = $("#dialogBox");
+
+        if (!dialogBox.length)
+            dialogBox = $(`<div id="dialogBox" class="dialog-box bottom"><div class="dialog-owner">${this.character.name}</div></div>`).appendTo(document.body);
 
         if ("option" in this.dialog)
         {
