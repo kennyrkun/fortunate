@@ -7,7 +7,7 @@ export class Character
         this.id = character.id;
         this.name = character.name;
 
-        this.element = $(`<img src="images/characters/chr${this.id}.png" id="character${this.id}" class="character" style="display: none">`);
+        this.element = $(`<img src="${window.location.href}game/images/characters/${this.id}.png" id="character${this.id}" class="character" style="display: none">`);
     }
 
     async show(fadeTime = window.game.config.characterFadeTime)
