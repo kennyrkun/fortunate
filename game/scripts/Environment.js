@@ -11,7 +11,7 @@ export class Environment
         this.attributes = attributes;
         
         // TODO: load then append
-        this.element = $(`<img src="images/environments/${environmentName}/${imageName}.png" id="environment-${imageName}" class="environment">`);
+        this.element = $(`<img src="${window.location.href}images/environments/${environmentName}/${imageName}.png" id="environment-${imageName}" class="environment">`);
         
         if ("click" in this.attributes)
         {
