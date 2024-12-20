@@ -49,19 +49,19 @@ export class LoadingState extends State
 
                 // TODO: have every model loaded automatically
                 $("#progressText").text("Loading dialog");
-                window.game.dialogData = await $.getJSON("./data/dialog.json");
+                window.game.dialogData = await $.getJSON("/game/data/dialog.json");
                 $("#progress").attr("value", 1);
 
                 $("#progressText").text("Loading characters");
-                window.game.characterData = await $.getJSON("./data/characters.json");
+                window.game.characterData = await $.getJSON("/game/data/characters.json");
                 $("#progress").attr("value", 2);
 
                 $("#progressText").text("Loading environments");
-                window.game.environmentData = await $.getJSON("./data/environments.json");
+                window.game.environmentData = await $.getJSON("/game/data/environments.json");
                 $("#progress").attr("value", 3);
 
                 $("#progressText").text("Loading game configuration");
-                window.game.config = await $.getJSON("./data/config.json");
+                window.game.config = await $.getJSON("/game/data/config.json");
                 $("#progress").attr("value", 4);
 
                 resolve(true);
